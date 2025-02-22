@@ -1,71 +1,111 @@
-# Aplicaci-n-de-gesti-n-para-parqueadero
-Este proyecto consiste en un sistema desarrollado para optimizar la gestión de vehículos y usuarios de un parqueadero, se utilizaron tecnologías, en fornt end como angular, JavaScript, TypeScript, html y css y backend Java y Springboot.
-https://parzibyte.me/blog/wp-content/uploads/2022/05/Software-para-parqueadero-Configurar-tarifas-de-cobro.png
 
 
-Paso 1: Instalar Angular CLI
-Angular CLI (Command Line Interface) es una herramienta de línea de comandos que facilita la creación y gestión de proyectos en Angular. Abre tu terminal y ejecuta el siguiente comando para instalar Angular CLI de forma global:
+---
 
-npm install -g @angular/cli
-Una vez completada la instalación, verifica que Angular CLI se haya instalado correctamente ejecutando el siguiente comando:
+# Sistema de Gestión de Parqueadero 🚗
 
-ng version
-Paso 2: Crear un nuevo proyecto
-Ahora que tienes Angular CLI instalado, puedes crear un nuevo proyecto Angular. Ejecuta el siguiente comando en tu terminal:
+¡Bienvenido al proyecto de **Sistema de Gestión de Parqueadero**! Este es un proyecto desarrollado en React que permite gestionar la entrada, salida y estadísticas de vehículos en un parqueadero.
 
-ng new mi-proyecto-angular
-Esto creará un nuevo directorio llamado “mi-proyecto-angular” y generará la estructura inicial del proyecto.
+---
 
-Paso 3: Navegar al directorio del proyecto
-Entra al directorio del proyecto recién creado utilizando el siguiente comando:
+## Características principales ✨
 
-cd mi-proyecto-angular
-Paso 4: Iniciar el servidor de desarrollo
-Una vez que estés dentro del directorio del proyecto, ejecuta el siguiente comando para iniciar el servidor de desarrollo de Angular:
+- **Registro de vehículos**: Permite registrar la entrada de vehículos al parqueadero.
+- **Control de salida**: Registra la salida de vehículos y calcula el costo del estacionamiento.
+- **Estadísticas en tiempo real**: Muestra información como la cantidad de vehículos estacionados, ingresos del día y disponibilidad de espacios.
+- **Interfaz amigable**: Diseño intuitivo y fácil de usar.
 
-ng serve
-Esto compilará tu proyecto y lo ejecutará en un servidor local. Abre tu navegador web y navega a http://localhost:4200. Ahí podrás ver tu aplicación Angular en funcionamiento.
+---
 
-Paso 5: Crear un componente
-Los componentes son los bloques de construcción fundamentales en Angular. Puedes crear un componente utilizando el siguiente comando:
+## Tecnologías utilizadas 🛠️
 
-ng generate component nombre-del-componente
-Esto generará automáticamente los archivos necesarios para tu nuevo componente, incluyendo el archivo de TypeScript, la plantilla HTML y el archivo de estilos CSS.
+- **React**: Biblioteca de JavaScript para construir la interfaz de usuario.
+- **React Router**: Para manejar la navegación entre páginas.
+- **Tailwind CSS**: Framework de estilos para diseñar la interfaz.
+- **Axios**: Para realizar peticiones HTTP a una API (si se integra con un backend).
+- **LocalStorage**: Para almacenar datos temporalmente en el navegador (en caso de no usar backend).
 
-Paso 6: Configurar rutas
-Las rutas te permiten navegar entre diferentes componentes en tu aplicación. Para configurar las rutas, abre el archivo app-routing.module.ts y agrega las siguientes líneas de código:
+---
 
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-];
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-Esto configurará las rutas para dos componentes: “HomeComponent” y “AboutComponent”. Asegúrate de crear estos componentes y sus respectivas plantillas correspondientes.
+## Instalación y configuración ⚙️
 
-Paso 7: Agregar contenido a los componentes
-Ahora puedes agregar contenido a tus componentes recién creados. Abre los archivos de componentes (nombre-del-componente.component.ts, nombre-del-componente.component.html y nombre-del-componente.component.css) y personalízalos según tus necesidades. Puedes agregar texto, imágenes, enlaces y mucho más.
+Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
-Paso 8: Ejecutar la aplicación
-Una vez que hayas terminado de agregar contenido a tus componentes, guarda los archivos y vuelve a tu terminal. Asegúrate de que el servidor de desarrollo de Angular siga en ejecución. Si no es así, ejecuta el siguiente comando nuevamente:
+1. **Clona el repositorio**:
+   ```bash
+   git clone https://github.com/tu-usuario/parqueadero-react.git
+   ```
 
-ng serve
-Luego, abre tu navegador y visita http://localhost:4200. Podrás ver tu aplicación Angular con los componentes y rutas que has creado.
+2. **Instala las dependencias**:
+   ```bash
+   cd parqueadero-react
+   npm install
+   ```
 
-¡Felicidades! Has creado tu primer proyecto en Angular desde cero. Ahora puedes seguir explorando y aprendiendo más sobre este poderoso framework.
+3. **Ejecuta el servidor de desarrollo**:
+   ```bash
+   npm start
+   ```
 
-Resumen y recomendaciones
-En este artículo, aprendiste cómo crear un proyecto en Angular desde cero. Cubrimos los pasos fundamentales, desde la instalación de Angular CLI hasta la configuración de rutas y la creación de componentes. Aquí hay algunas recomendaciones finales:
+4. **Abre el proyecto en tu navegador**:
+   Visita `http://localhost:3000` para ver la aplicación en funcionamiento.
 
-Familiarízate con la estructura de archivos generada por Angular CLI. Te ayudará a organizar tu proyecto de manera eficiente.
-Explora la documentación oficial de Angular (https://angular.io) para conocer más sobre las características y capacidades del framework.
-Practica construyendo diferentes componentes y experimenta con las diversas funcionalidades de Angular.
-Únete a la comunidad de Angular y participa en foros y grupos de discusión. Es una excelente manera de aprender de otros desarrolladores y compartir tus conocimientos.
-¡Ahora estás listo para comenzar a construir tus propios proyectos en Angular! Disfruta del viaje y continúa aprendiendo.
+---
+
+## Estructura del proyecto 📂
+
+```
+parqueadero-react/
+├── public/                  # Archivos públicos (HTML, imágenes, etc.)
+├── src/                     # Código fuente del proyecto
+│   ├── components/          # Componentes reutilizables
+│   ├── pages/               # Páginas de la aplicación
+│   ├── services/            # Lógica para manejar datos (API, LocalStorage, etc.)
+│   ├── styles/              # Archivos de estilos (CSS, Tailwind, etc.)
+│   ├── App.js               # Componente principal
+│   └── index.js             # Punto de entrada de la aplicación
+├── .gitignore               # Archivos y carpetas ignorados por Git
+├── package.json             # Dependencias y scripts del proyecto
+└── README.md                # Este archivo
+```
+
+---
+
+## Capturas de pantalla 📸
+
+![Captura 1](https://parzibyte.me/blog/wp-content/uploads/2022/05/Software-para-parqueadero-Configurar-tarifas-de-cobro.png)  
+*Descripción de la captura 1.*
+
+![Captura 2](https://via.placeholder.com/800x400)  
+*Descripción de la captura 2.*
+
+---
+
+## Cómo contribuir 🚀
+
+¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, sigue estos pasos:
+
+1. Haz un **fork** del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -m 'Añade nueva funcionalidad'`).
+4. Sube los cambios a tu rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un **Pull Request** y describe tus cambios.
+
+---
+
+## Licencia 📄
+
+Este proyecto está bajo la licencia **MIT**. Para más detalles, consulta el archivo [LICENSE](LICENSE).
+
+---
+
+## Contacto 📧
+
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
+
+- **Nombre**: [Tu nombre]
+- **Email**: [breynersmartinezmunoz@gmail.com]
+- **GitHub**: [@tu-usuario](https://github.com/tu-usuario)
+
+---
+
