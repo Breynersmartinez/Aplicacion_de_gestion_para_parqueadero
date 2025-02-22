@@ -1,111 +1,70 @@
+# GitHub Codespaces ♥️ React
 
+Welcome to your shiny new Codespace running React! We've got everything fired up and running for you to explore React.
 
----
+You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
 
-# Sistema de Gestión de Parqueadero 🚗
+Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
 
-¡Bienvenido al proyecto de **Sistema de Gestión de Parqueadero**! Este es un proyecto desarrollado en React que permite gestionar la entrada, salida y estadísticas de vehículos en un parqueadero.
+This project was bootstrapped for you with [Vite](https://vitejs.dev/).
 
----
+## Available Scripts
 
-## Características principales ✨
+In the project directory, you can run:
 
-- **Registro de vehículos**: Permite registrar la entrada de vehículos al parqueadero.
-- **Control de salida**: Registra la salida de vehículos y calcula el costo del estacionamiento.
-- **Estadísticas en tiempo real**: Muestra información como la cantidad de vehículos estacionados, ingresos del día y disponibilidad de espacios.
-- **Interfaz amigable**: Diseño intuitivo y fácil de usar.
+### `npm start`
 
----
+We've already run this for you in the `Codespaces: server` terminal window below. If you need to stop the server for any reason you can just run `npm start` again to bring it back online.
 
-## Tecnologías utilizadas 🛠️
+Runs the app in the development mode.\
+Open [http://localhost:3000/](http://localhost:3000/) in the built-in Simple Browser (`Cmd/Ctrl + Shift + P > Simple Browser: Show`) to view your running application.
 
-- **React**: Biblioteca de JavaScript para construir la interfaz de usuario.
-- **React Router**: Para manejar la navegación entre páginas.
-- **Tailwind CSS**: Framework de estilos para diseñar la interfaz.
-- **Axios**: Para realizar peticiones HTTP a una API (si se integra con un backend).
-- **LocalStorage**: Para almacenar datos temporalmente en el navegador (en caso de no usar backend).
+The page will reload automatically when you make changes.\
+You may also see any lint errors in the console.
 
----
+### `npm test`
 
-## Instalación y configuración ⚙️
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
+### `npm run build`
 
-1. **Clona el repositorio**:
-   ```bash
-   git clone https://github.com/tu-usuario/parqueadero-react.git
-   ```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-2. **Instala las dependencias**:
-   ```bash
-   cd parqueadero-react
-   npm install
-   ```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-3. **Ejecuta el servidor de desarrollo**:
-   ```bash
-   npm start
-   ```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-4. **Abre el proyecto en tu navegador**:
-   Visita `http://localhost:3000` para ver la aplicación en funcionamiento.
+## Learn More
 
----
+You can learn more in the [Vite documentation](https://vitejs.dev/guide/).
 
-## Estructura del proyecto 📂
+To learn Vitest, a Vite-native testing framework, go to [Vitest documentation](https://vitest.dev/guide/)
 
-```
-parqueadero-react/
-├── public/                  # Archivos públicos (HTML, imágenes, etc.)
-├── src/                     # Código fuente del proyecto
-│   ├── components/          # Componentes reutilizables
-│   ├── pages/               # Páginas de la aplicación
-│   ├── services/            # Lógica para manejar datos (API, LocalStorage, etc.)
-│   ├── styles/              # Archivos de estilos (CSS, Tailwind, etc.)
-│   ├── App.js               # Componente principal
-│   └── index.js             # Punto de entrada de la aplicación
-├── .gitignore               # Archivos y carpetas ignorados por Git
-├── package.json             # Dependencias y scripts del proyecto
-└── README.md                # Este archivo
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
----
+### Code Splitting
 
-## Capturas de pantalla 📸
+This section has moved here: [https://sambitsahoo.com/blog/vite-code-splitting-that-works.html](https://sambitsahoo.com/blog/vite-code-splitting-that-works.html)
 
-![Captura 1](https://parzibyte.me/blog/wp-content/uploads/2022/05/Software-para-parqueadero-Configurar-tarifas-de-cobro.png)  
-*Descripción de la captura 1.*
+### Analyzing the Bundle Size
 
-![Captura 2](https://via.placeholder.com/800x400)  
-*Descripción de la captura 2.*
+This section has moved here: [https://github.com/btd/rollup-plugin-visualizer#rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer#rollup-plugin-visualizer)
 
----
+### Making a Progressive Web App
 
-## Cómo contribuir 🚀
+This section has moved here: [https://dev.to/hamdankhan364/simplifying-progressive-web-app-pwa-development-with-vite-a-beginners-guide-38cf](https://dev.to/hamdankhan364/simplifying-progressive-web-app-pwa-development-with-vite-a-beginners-guide-38cf)
 
-¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, sigue estos pasos:
+### Advanced Configuration
 
-1. Haz un **fork** del repositorio.
-2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit (`git commit -m 'Añade nueva funcionalidad'`).
-4. Sube los cambios a tu rama (`git push origin feature/nueva-funcionalidad`).
-5. Abre un **Pull Request** y describe tus cambios.
+This section has moved here: [https://vitejs.dev/guide/build.html#advanced-base-options](https://vitejs.dev/guide/build.html#advanced-base-options)
 
----
+### Deployment
 
-## Licencia 📄
+This section has moved here: [https://vitejs.dev/guide/build.html](https://vitejs.dev/guide/build.html)
 
-Este proyecto está bajo la licencia **MIT**. Para más detalles, consulta el archivo [LICENSE](LICENSE).
+### Troubleshooting
 
----
-
-## Contacto 📧
-
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
-
-- **Nombre**: [Tu nombre]
-- **Email**: [breynersmartinezmunoz@gmail.com]
-- **GitHub**: [@tu-usuario](https://github.com/tu-usuario)
-
----
-
+This section has moved here: [https://vitejs.dev/guide/troubleshooting.html](https://vitejs.dev/guide/troubleshooting.html)
