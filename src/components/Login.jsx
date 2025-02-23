@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/StellarCodeLogo.jpg"; // imagen aquí
+import "../styles/Login.css"; // Ruta correcta al archivo CSS
 
 function Login({ onSwitch }) {
   const handleSubmit = (e) => {
@@ -28,6 +29,7 @@ function Login({ onSwitch }) {
         
         <span className="switch-link" onClick={onSwitch}>
           Regístrate aquí
+          
         </span>
         </label>
       </p>
