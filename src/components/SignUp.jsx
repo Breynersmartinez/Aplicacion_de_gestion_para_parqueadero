@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/StellarCodeLogo.jpg"; 
+import "../styles/SignUp.css"; // Ruta correcta al archivo CSS
 
 function SignUp({ onSwitch }) {
   const handleSubmit = (e) => {
