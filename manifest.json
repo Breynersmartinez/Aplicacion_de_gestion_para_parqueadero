@@ -1,24 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "App",
+  "name": "Aplicación de Gestión para Parqueadero",
   "icons": [
     {
-      "src": "/Aplicacion_de_gestion_para_parqueadero/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "/Aplicacion_de_gestion_para_parqueadero/logo192.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/Aplicacion_de_gestion_para_parqueadero/logo512.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/Aplicacion_de_gestion_para_parqueadero/",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
