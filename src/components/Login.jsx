@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "/public/StellarCodeLogo.jpg"; // Añade tu imagen aquí
+import logo from "../assets/StellarCodeLogo.jpg"; // imagen aquí
 
 function Login({ onSwitch }) {
   const handleSubmit = (e) => {

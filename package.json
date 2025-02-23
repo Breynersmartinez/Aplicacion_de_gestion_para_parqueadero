@@ -21,7 +21,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
-  },
+},
   "eslintConfig": {
     "extends": [
       "react-app",
