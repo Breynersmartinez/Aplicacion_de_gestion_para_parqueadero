@@ -1,25 +1,25 @@
-//Configura la navegación entre la página
-import React, { useState } from "react";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import FeatureSection from "./components/FeatureSection";
+import Workflow from "./components/Workflow";
+import Footer from "./components/Footer";
+import Pricing from "./components/Pricing";
+import Testimonials from "./components/Testimonials";
 
-
-import "./styles/App.css";
-import "./styles/Login.css";
-import "./styles/SignUp.css";
-
-function App() {
-  const [isLogin, setIsLogin] = useState(true);
-
+const App = () => {
   return (
-    <div className="app">
-      {isLogin ? (
-        <Login onSwitch={() => setIsLogin(false)} />
-      ) : (
-        <SignUp onSwitch={() => setIsLogin(true)} />
-      )}
-    </div>
+    <>
+      <Navbar />
+      <div className="max-w-7xl mx-auto pt-20 px-6">
+        <HeroSection />
+        <FeatureSection />
+        <Workflow />
+        <Pricing />
+        <Testimonials />
+        <Footer />
+      </div>
+    </>
   );
-}
+};
 
 export default App;
