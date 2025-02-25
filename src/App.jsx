@@ -1,24 +1,30 @@
-//Configura la navegación entre la página
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import HomePage from "./components/HomePage"; // Importa la página de inicio
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-
-
 import "./styles/App.css";
 import "./styles/Login.css";
 import "./styles/SignUp.css";
+import "./styles/HomePage.css"; // Importa los estilos de la página de inicio
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
-
   return (
-    <div className="app">
-      {isLogin ? (
-        <Login onSwitch={() => setIsLogin(false)} />
-      ) : (
-        <SignUp onSwitch={() => setIsLogin(true)} />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        {/* Ruta para la página de inicio */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* Ruta para el login */}
+        <Route path="/login" element={<Login onSwitch={() => <Navigate to="/signup" />} />} />
+
+        {/* Ruta para el registro */}
+        <Route path="/signup" element={<SignUp onSwitch={() => <Navigate to="/login" />} />} />
+
+        {/* Redirección por defecto a la página de inicio */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 
