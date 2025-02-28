@@ -1,5 +1,5 @@
 import video1 from "../assets/parqueaderoAnimadoFondoMoradoAzul.avif";
-import video2 from "../assets/Estacionamiento3.jpg";
+import video2 from "../assets/parqueaderoAnimadoFondoMoradoAzul.avif";
 
 const HeroSection = () => {
   return (
@@ -21,10 +21,10 @@ const HeroSection = () => {
           href="#"
           className="bg-gradient-to-r from-blue-500 to-blue-800 py-3 px-4 mx-3 rounded-md"
         >
-          Start for free
+          Reservar
         </a>
         <a href="#" className="py-3 px-4 mx-3 rounded-md border">
-          Documentation
+          Manual de usuario
         </a>
       </div>
       <div className="flex mt-10 justify-center">
