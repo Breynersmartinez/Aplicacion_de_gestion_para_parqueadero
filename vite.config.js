@@ -7,4 +7,3 @@ export default defineConfig({
   plugins: [react()],
   base: "/Aplicacion_de_gestion_para_parqueadero/",
 });
-
