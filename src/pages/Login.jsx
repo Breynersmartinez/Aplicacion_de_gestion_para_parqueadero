@@ -1,8 +1,11 @@
-import React from "react";
-import logo from "../assets/StellarCodeLogo.jpg"; // imagen aquí
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from "../assets/StellarCodeLogo.jpg";
 import "../styles/Login.css";
 
 function Login({ onSwitch }) {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Lógica para manejar el inicio de sesión
@@ -26,10 +29,8 @@ function Login({ onSwitch }) {
       </form>
       <p>
         <label> ¿No tienes una cuenta? {" "}
-        
-        <span className="switch-link" onClick={onSwitch}>
+        <span className="switch-link" onClick={() => navigate('/signup')}>
           Regístrate aquí
-          
         </span>
         </label>
       </p>

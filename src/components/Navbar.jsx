@@ -1,13 +1,19 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/StellarCodeLogo.jpg";
 import { navItems } from "../constants";
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
+  };
+ 
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -16,7 +22,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center flex-shrink-0">
             <img className="h-10 w-10 mr-2" src={logo} alt="Logo" />
-            <span className="text-xl tracking-tight">VirtualR</span>
+            <span className="text-xl tracking-tight">StellarPark</span>
           </div>
           <ul className="hidden lg:flex ml-14 space-x-12">
             {navItems.map((item, index) => (
@@ -26,15 +32,13 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-12 items-center">
-            <a href="#" className="py-2 px-3 border rounded-md">
+            <a href="#" className="py-2 px-3 border rounded-md" onClick={handleLoginClick}>
               Sign In
             </a>
-            <a
-              href="#"
-              className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md"
-            >
-              Create an account
-            </a>
+            <button className="py-2 px-3 border rounded-md" onClick={handleLoginClick}>
+              Iniciar Sesión
+            </button>
+        
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
             <button onClick={toggleNavbar}>
@@ -51,16 +55,11 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex space-x-6">
-              <a href="#" className="py-2 px-3 border rounded-md">
+            <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
+              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClick}>
                 Sign In
               </a>
-              <a
-                href="#"
-                className="py-2 px-3 rounded-md bg-gradient-to-r from-orange-500 to-orange-800"
-              >
-                Create an account
-              </a>
+           
             </div>
           </div>
         )}

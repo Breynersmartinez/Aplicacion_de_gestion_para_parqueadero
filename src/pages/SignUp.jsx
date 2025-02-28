@@ -1,8 +1,11 @@
-import React from "react";
-import logo from "../assets/StellarCodeLogo.jpg"; 
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from "../assets/StellarCodeLogo.jpg";
 import "../styles/SignUp.css";
 
 function SignUp({ onSwitch }) {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Lógica para manejar el registro
@@ -29,11 +32,11 @@ function SignUp({ onSwitch }) {
         <button type="submit">Registrarse</button>
       </form>
       <p>
-        <label >
-        ¿Ya tienes una cuenta?{" "}
-        <span className="switch-link" onClick={onSwitch}>
-          Inicia sesión aquí
-        </span>
+        <label>
+          ¿Ya tienes una cuenta?{" "}
+          <span className="switch-link" onClick={() => navigate('/login')}>
+            Inicia sesión aquí
+          </span>
         </label>
       </p>
     </div>
