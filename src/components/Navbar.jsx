@@ -32,10 +32,8 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center space-x-12 items-center">
-            <a href="#" className="py-2 px-3 border rounded-md" onClick={handleLoginClick}>
-              Sign In
-            </a>
-            <button className="py-2 px-3 border rounded-md" onClick={handleLoginClick}>
+          
+            <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
               Iniciar Sesión
             </button>
         
@@ -57,7 +55,7 @@ const Navbar = () => {
             </ul>
             <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
               <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClick}>
-                Sign In
+              Iniciar Sesión
               </a>
            
             </div>

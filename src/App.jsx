@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import FeatureSection from './components/FeatureSection';
@@ -12,30 +12,38 @@ import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/Aplicacion_de_gestion_para_parqueadero">
       <Navbar />
       <div className="max-w-7xl mx-auto pt-20 px-6">
         <Routes>
-          <Route path="/" element={
-            <>
-              <HeroSection />
-              <FeatureSection />
-              <Workflow />
-              <Pricing />
-              <Testimonials />
-            
-            </>
-          } />
-          <Route path="/login" element={<Login onSwitch={() => <Navigate to="/signup" />} />} />
-          <Route path="/signup" element={<SignUp onSwitch={() => <Navigate to="/login" />} />} />
+          {/* Ruta principal */}
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection />
+                <FeatureSection />
+                <Workflow />
+                <Pricing />
+                <Testimonials />
+              </>
+            }
+          />
+
+          {/* Ruta de inicio de sesión */}
+          <Route
+            path="/login"
+            element={<Login onSwitch={() => window.location.href = "/Aplicacion_de_gestion_para_parqueadero/signup"} />}
+          />
+
+          {/* Ruta de registro */}
+          <Route
+            path="/signup"
+            element={<SignUp onSwitch={() => window.location.href = "/Aplicacion_de_gestion_para_parqueadero/login"} />}
+          />
         </Routes>
-        <HeroSection />
-              <FeatureSection />
-              <Workflow />
-              <Pricing />
-              <Testimonials />
-        <Footer />
       </div>
+      <Footer />
     </Router>
   );
 };
