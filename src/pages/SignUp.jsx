@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/StellarCodeLogo.jpg";
 import "../styles/SignUp.css";
+import googleLogo from "../assets/google-logo.png"; // Ruta a la imagen del logo de Google
 
 function SignUp({ onSwitch }) {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ function SignUp({ onSwitch }) {
         </div>
         <button type="submit">Registrarse</button>
       </form>
+        <button onClick={() => window.location.href = "https://accounts.google.com"} className="google-btn">
+            <img src={googleLogo} alt="Google Logo" className="google-icon" /> Iniciar sesión con Google
+          </button>
       <p>
         <label>
           ¿Ya tienes una cuenta?{" "}
