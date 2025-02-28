@@ -13,166 +13,176 @@ import user5 from "../assets/profile-pictures/user5.jpg";
 import user6 from "../assets/profile-pictures/user6.jpg";
 
 export const navItems = [
-  { label: "Features", href: "#" },
-  { label: "Workflow", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "Testimonials", href: "#" },
+  { label: "Reserva", href: "#" },
+  { label: "Servicios", href: "#Servicios" },
+  { label: "Precios", href: "#Precios" },
+  { label: "Opiniones", href: "#Opiniones" },
 ];
-
 export const testimonials = [
   {
-    user: "John Doe",
-    company: "Stellar Solutions",
+    user: "Carlos Martínez",
+    company: "Tech Solutions",
     image: user1,
-    text: "I am extremely satisfied with the services provided. The team was responsive, professional, and delivered results beyond my expectations.",
+    text: "Estoy muy satisfecho con el servicio de estacionamiento. La reserva en línea es rápida y sencilla, y nunca he tenido problemas para encontrar un espacio.",
   },
   {
-    user: "Jane Smith",
+    user: "Ana López",
     company: "Blue Horizon Technologies",
     image: user2,
-    text: "I couldn't be happier with the outcome of our project. The team's creativity and problem-solving skills were instrumental in bringing our vision to life",
+    text: "El sistema de control de acceso es increíblemente eficiente. Me siento segura sabiendo que solo los vehículos autorizados pueden ingresar al parqueadero.",
   },
   {
-    user: "David Johnson",
+    user: "David García",
     company: "Quantum Innovations",
     image: user3,
-    text: "Working with this company was a pleasure. Their attention to detail and commitment to excellence are commendable. I would highly recommend them to anyone looking for top-notch service.",
+    text: "La atención al cliente es excepcional. Cada vez que he tenido una pregunta o problema, el equipo ha respondido de manera rápida y profesional.",
   },
   {
-    user: "Ronee Brown",
+    user: "Rocío Fernández",
     company: "Fusion Dynamics",
     image: user4,
-    text: "Working with the team at XYZ Company was a game-changer for our project. Their attention to detail and innovative solutions helped us achieve our goals faster than we thought possible. We are grateful for their expertise and professionalism!",
+    text: "Las estaciones de carga para vehículos eléctricos son un gran plus. Ahora puedo cargar mi coche mientras trabajo, lo que me ahorra mucho tiempo.",
   },
   {
-    user: "Michael Wilson",
+    user: "Miguel Torres",
     company: "Visionary Creations",
     image: user5,
-    text: "I am amazed by the level of professionalism and dedication shown by the team. They were able to exceed our expectations and deliver outstanding results.",
+    text: "El sistema de pago automatizado es muy conveniente. Puedo pagar desde mi teléfono y salir del parqueadero sin demoras.",
   },
   {
-    user: "Emily Davis",
+    user: "Elena Sánchez",
     company: "Synergy Systems",
     image: user6,
-    text: "The team went above and beyond to ensure our project was a success. Their expertise and dedication are unmatched. I look forward to working with them again in the future.",
+    text: "La seguridad del parqueadero es excelente. Las cámaras de vigilancia y el personal de seguridad me hacen sentir tranquila al dejar mi coche aquí.",
   },
 ];
 
 export const features = [
   {
     icon: <BotMessageSquare />,
-    text: "Drag-and-Drop Interface",
+    text: "Reservas en Línea",
     description:
-      "Easily design and arrange your VR environments with a user-friendly drag-and-drop interface.",
+      "Permite a los usuarios reservar espacios de estacionamiento en línea de manera rápida y sencilla.",
   },
   {
     icon: <Fingerprint />,
-    text: "Multi-Platform Compatibility",
+    text: "Control de Acceso",
     description:
-      "Build VR applications that run seamlessly across multiple platforms, including mobile, desktop, and VR headsets.",
+      "Sistema de control de acceso mediante reconocimiento de matrículas o tarjetas RFID para una gestión segura y eficiente.",
   },
   {
     icon: <ShieldHalf />,
-    text: "Built-in Templates",
+    text: "Seguridad 24/7",
     description:
-      "Jumpstart your VR projects with a variety of built-in templates for different types of applications and environments.",
+      "Vigilancia constante con cámaras de seguridad y personal de vigilancia para garantizar la seguridad de los vehículos.",
   },
   {
     icon: <BatteryCharging />,
-    text: "Real-Time Preview",
+    text: "Carga para Vehículos Eléctricos",
     description:
-      "Preview your VR application in real-time as you make changes, allowing for quick iterations and adjustments.",
+      "Disponibilidad de estaciones de carga para vehículos eléctricos, facilitando la movilidad sostenible.",
   },
   {
     icon: <PlugZap />,
-    text: "Collaboration Tools",
+    text: "Sistema de Pago Automatizado",
     description:
-      "Work together with your team in real-time on VR projects, enabling seamless collaboration and idea sharing.",
+      "Pago automatizado mediante aplicaciones móviles o máquinas de autoservicio, agilizando la salida del parqueadero.",
   },
   {
     icon: <GlobeLock />,
-    text: "Analytics Dashboard",
+    text: "Monitoreo en Tiempo Real",
     description:
-      "Gain valuable insights into user interactions and behavior within your VR applications with an integrated analytics dashboard.",
+      "Plataforma de monitoreo en tiempo real que muestra la disponibilidad de espacios y el estado del parqueadero.",
   },
 ];
 
 export const checklistItems = [
   {
-    title: "Code merge made easy",
+    title: "Gestión de Espacios en Tiempo Real",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Monitorea y gestiona la disponibilidad de espacios de estacionamiento en tiempo real para optimizar el uso del parqueadero.",
   },
   {
-    title: "Review code without worry",
+    title: "Reservas Automatizadas",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Permite a los usuarios reservar espacios de estacionamiento de manera rápida y sencilla a través de una aplicación móvil o sitio web.",
   },
   {
-    title: "AI Assistance to reduce time",
+    title: "Sistema de Pago Integrado",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Facilita el proceso de pago con opciones de pago en línea y en sitio, agilizando la salida de los vehículos.",
   },
   {
-    title: "Share work in minutes",
+    title: "Control de Acceso Avanzado",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Implementa tecnologías como reconocimiento de matrículas y tarjetas RFID para un control de acceso seguro y eficiente.",
+  },
+  {
+    title: "Seguridad y Vigilancia",
+    description:
+      "Ofrece vigilancia constante con cámaras de seguridad y personal de vigilancia para garantizar la seguridad de los vehículos.",
+  },
+  {
+    title: "Soporte para Vehículos Eléctricos",
+    description:
+      "Incluye estaciones de carga para vehículos eléctricos, promoviendo la movilidad sostenible.",
   },
 ];
-
 export const pricingOptions = [
   {
-    title: "Free",
-    price: "$0",
+    title: "Básico",
+    price: "$50.000/mes",
     features: [
-      "Private board sharing",
-      "5 Gb Storage",
-      "Web Analytics",
-      "Private Mode",
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
     ],
   },
   {
-    title: "Pro",
-    price: "$10",
+    title: "Estándar",
+    price: "$150.000/mes",
     features: [
-      "Private board sharing",
-      "10 Gb Storage",
-      "Web Analytics (Advance)",
-      "Private Mode",
+      "Gestión de hasta 2 vehículos",
+      "Reservas en línea y app móvil",
+      "Control de acceso con reconocimiento de matrículas",
+      "Soporte prioritario 24/7",
+      "Informes de ocupación mensuales",
     ],
   },
   {
-    title: "Enterprise",
-    price: "$200",
+    title: "Premium",
+    price: "$500.000/mes",
     features: [
-      "Private board sharing",
-      "Unlimited Storage",
-      "High Performance Network",
-      "Private Mode",
+      "Gestión ilimitada de vehículos",
+      "Reservas en línea, app móvil y kioskos",
+      "Control de acceso con RFID y reconocimiento de matrículas",
+      "Soporte premium 24/7 con asistencia en sitio",
+      "Informes de ocupación en tiempo real",
+      "Integración con sistemas de pago electrónico",
     ],
   },
 ];
 
 export const resourcesLinks = [
-  { href: "#", text: "Getting Started" },
-  { href: "#", text: "Documentation" },
-  { href: "#", text: "Tutorials" },
-  { href: "#", text: "API Reference" },
-  { href: "#", text: "Community Forums" },
+  { href: "#", text: "Cómo Funciona" },
+  { href: "#", text: "Guía de Usuario" },
+  { href: "#", text: "Preguntas Frecuentes" },
+  { href: "#", text: "Soporte Técnico" },
+  { href: "#", text: "Políticas de Privacidad" },
 ];
 
 export const platformLinks = [
-  { href: "#", text: "Features" },
-  { href: "#", text: "Supported Devices" },
-  { href: "#", text: "System Requirements" },
-  { href: "#", text: "Downloads" },
-  { href: "#", text: "Release Notes" },
+  { href: "#", text: "Reservas en Línea" },
+  { href: "#", text: "Control de Acceso" },
+  { href: "#", text: "Sistema de Pago" },
+  { href: "#", text: "Seguridad y Vigilancia" },
+  { href: "#", text: "Soporte para Vehículos Eléctricos" },
 ];
-
 export const communityLinks = [
-  { href: "#", text: "Events" },
-  { href: "#", text: "Meetups" },
-  { href: "#", text: "Conferences" },
-  { href: "#", text: "Hackathons" },
-  { href: "#", text: "Jobs" },
+  { href: "#", text: "Eventos y Promociones" },
+  { href: "#", text: "Testimonios de Clientes" },
+  { href: "#", text: "Blog y Noticias" },
+  { href: "#", text: "Trabaja con Nosotros" },
+  { href: "#", text: "Contacto" },
 ];
