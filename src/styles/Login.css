@@ -4,7 +4,7 @@
     background: linear-gradient(to left, #050505, #050505);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(2, 2, 2, 0.1);
+     box-shadow: 0 4px 6px rgba(2, 2, 2, 0.1);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -12,6 +12,8 @@
     justify-content: center;
     align-items: center;
  
+    margin: 0 auto;
+  
   }
   
   .logo {
@@ -69,4 +71,28 @@
     color: #0056b3;
   }
 
+  .google-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .google-btn:hover {
+    background-color: #f8f9fa; /* Color de fondo al pasar el puntero */
+  }
+  
+  .google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
   
