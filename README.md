@@ -1,4 +1,6 @@
-[![MasterHead](https://okhosting.com/wp-content/uploads/Software.jpg)
+hola
+
+![MasterHead](https://okhosting.com/wp-content/uploads/Software.jpg)
 # Sistema de Gestión de Parqueadero 🚗
 
 ¡Bienvenido al proyecto de **Sistema de Gestión de Parqueadero**! Este es un proyecto desarrollado en React que permite gestionar la entrada, salida y estadísticas de vehículos en un parqueadero.
