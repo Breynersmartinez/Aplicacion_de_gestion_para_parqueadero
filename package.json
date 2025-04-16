@@ -8,12 +8,12 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "vite --port 8000",
-       "deploy": "gh-pages -d dist",
-       "homepage": "/Aplicacion_de_gestion_para_parqueadero/"
-
+    "start": "vite --port 3000",
+    "deploy": "gh-pages -d dist",
+    "homepage": "/Aplicacion_de_gestion_para_parqueadero/"
   },
   "dependencies": {
+    "axios": "^1.8.4",
     "lucide-react": "^0.344.0",
     "node": "^18.20.7",
     "react": "^18.2.0",
