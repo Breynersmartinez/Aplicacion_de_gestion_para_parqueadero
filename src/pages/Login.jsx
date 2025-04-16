@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/StellarCodeLogo.jpg";
-import googleLogo from "../assets/google-logo.png"; // Ruta a la imagen del logo de Google
+import googleLogo from "../assets/google-logo.png";
 import "../styles/Login.css";
 
 function Login({ onSwitch }) {
   const navigate = useNavigate();
+  const [idCard, setIdCard] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica para manejar el inicio de sesión
-    console.log("Iniciando sesión...");
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Administrador/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idCard: parseInt(idCard),
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Inicio de sesión exitoso");
+        navigate('/dashboard'); // Redirige a donde necesites
+      } else {
+        const errorMessage = await response.text();
+        setError(errorMessage);
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      setError("Error de red o del servidor");
+    }
   };
 
   return (
@@ -19,25 +44,27 @@ function Login({ onSwitch }) {
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Correo Electrónico</label>
-          <input type="email" required />
+          <label>Cédula (ID)</label>
+          <input
+            type="number"
+            value={idCard}
+            onChange={(e) => setIdCard(e.target.value)}
+            required
+          />
         </div>
         <div className="form-group">
           <label>Contraseña</label>
-          <input type="password" required />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Iniciar Sesión</button>
       </form>
-      <button onClick={() => window.location.href = "https://accounts.google.com"} className="google-btn">
-        <img src={googleLogo} alt="Google Logo" className="google-icon" /> Iniciar sesión con Google
-      </button>
-      <p>
-        <label> ¿No tienes una cuenta? {" "}
-        <span className="switch-link" onClick={onSwitch}>
-          Regístrate aquí
-        </span>
-        </label>
-      </p>
+      
     </div>
   );
 }
