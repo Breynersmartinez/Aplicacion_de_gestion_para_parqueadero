@@ -8,42 +8,36 @@ import Footer from './components/Footer';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import AdminDashboard from './pages/AdminDashboard';
 
 const App = () => {
   return (
     <Router basename="/Aplicacion_de_gestion_para_parqueadero">
-      <Navbar />
-      <div className="max-w-7xl mx-auto pt-20 px-6">
-        <Routes>
-          {/* Ruta principal */}
-          <Route
-            path="/"
-            element={
-              <>
+      <Routes>
+        {/* Ruta principal */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <div className="max-w-7xl mx-auto pt-20 px-6">
                 <HeroSection />
                 <FeatureSection />
                 <Workflow />
                 <Pricing />
                 <Testimonials />
-              </>
-            }
-          />
+              </div>
+              <Footer />
+            </>
+          }
+        />
 
-          {/* Ruta de inicio de sesión */}
-          <Route
-            path="/login"
-            element={<Login onSwitch={() => window.location.href = "/Aplicacion_de_gestion_para_parqueadero/signup"} />}
-          />
-
-          {/* Ruta de registro */}
-          <Route
-            path="/signup"
-            element={<SignUp onSwitch={() => window.location.href = "/Aplicacion_de_gestion_para_parqueadero/login"} />}
-          />
-        </Routes>
-      </div>
-      <Footer />
+        {/* Ruta de inicio de sesión */}
+        <Route path="/login" element={<Login />} />
+        
+        {/* Ruta para el panel de administración */}
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      </Routes>
     </Router>
   );
 };
