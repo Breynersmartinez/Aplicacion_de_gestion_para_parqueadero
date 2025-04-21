@@ -181,9 +181,9 @@ function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración</h1>
+        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores </h1>
         <div className="flex items-center">
-          <span className="mr-4 text-gray-700">
+          <span className="mr-4 text-white-700">
             Bienvenido, {localStorage.getItem('adminName')}
           </span>
           <button 
