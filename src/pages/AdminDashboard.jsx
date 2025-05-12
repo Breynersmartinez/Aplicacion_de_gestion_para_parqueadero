@@ -10,7 +10,7 @@ function AdminDashboard() {
   const [isEditingAdmin, setIsEditingAdmin] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({
     idCard: '',
-    nameAdmin: '',
+    name: '',
     password: ''
   });
 
@@ -71,7 +71,7 @@ function AdminDashboard() {
   const resetForm = () => {
     setCurrentAdmin({
       idCard: '',
-      nameAdmin: '',
+      name: '',
       password: ''
     });
   };
@@ -85,7 +85,7 @@ function AdminDashboard() {
   const handleEditAdmin = (admin) => {
     setCurrentAdmin({
       idCard: admin.idCard,
-      nameAdmin: admin.nameAdmin,
+      name: admin.name,
       password: '' // No mostramos la contraseña por seguridad
     });
     setIsEditingAdmin(true);
@@ -121,8 +121,8 @@ function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!currentAdmin.idCard || !currentAdmin.nameAdmin || (!isEditingAdmin && !currentAdmin.password)) {
+
+    if (!currentAdmin.idCard || !currentAdmin.name || (!isEditingAdmin && !currentAdmin.password)) {
       setError('Todos los campos son obligatorios');
       return;
     }
@@ -181,9 +181,9 @@ function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores </h1>
+        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores</h1>
         <div className="flex items-center">
-          <span className="mr-4 text-white-700">
+          <span className="mr-4 text-gray-700">
             Bienvenido, {localStorage.getItem('adminName')}
           </span>
           <button 
@@ -216,7 +216,7 @@ function AdminDashboard() {
             <h2 className="text-lg leading-6 font-medium text-gray-900">Lista de Administradores</h2>
             <button 
               onClick={handleAddAdmin}
-              className="bg-blue-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors duration-200"
+              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
             >
               Agregar Administrador
             </button>
@@ -250,7 +250,7 @@ function AdminDashboard() {
                           {admin.idCard}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {admin.nameAdmin}
+                          {admin.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
@@ -302,14 +302,14 @@ function AdminDashboard() {
                   </div>
                   
                   <div>
-                    <label htmlFor="nameAdmin" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                       Nombre
                     </label>
                     <input
                       type="text"
-                      name="nameAdmin"
-                      id="nameAdmin"
-                      value={currentAdmin.nameAdmin}
+                      name="name"
+                      id="name"
+                      value={currentAdmin.name}
                       onChange={handleInputChange}
                       className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
                       required

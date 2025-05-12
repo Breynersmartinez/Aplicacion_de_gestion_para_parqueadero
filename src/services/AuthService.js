@@ -1,16 +1,16 @@
 // src/services/AuthService.js
 
 class AuthService {
-    static login(token, adminId, adminName) {
+    static login(token, idCard, name) {
       localStorage.setItem('token', token);
-      localStorage.setItem('adminId', adminId);
-      localStorage.setItem('adminName', adminName);
+      localStorage.setItem('idCard', idCard);
+      localStorage.setItem('name', name);
     }
   
     static logout() {
       localStorage.removeItem('token');
-      localStorage.removeItem('adminId');
-      localStorage.removeItem('adminName');
+      localStorage.removeItem('idCard');
+      localStorage.removeItem('name');
     }
   
     static isAuthenticated() {

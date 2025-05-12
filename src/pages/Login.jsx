@@ -30,7 +30,7 @@ function Login() {
         // Guardar el token JWT y la información del administrador
         localStorage.setItem('token', data.token);
         localStorage.setItem('adminId', data.admin.idCard);
-        localStorage.setItem('adminName', data.admin.nameAdmin);
+        localStorage.setItem('adminName', data.admin.name);
         navigate('/admin-dashboard');
       } else {
         setError(data.message || "Credenciales incorrectas. Por favor, inténtelo de nuevo.");
