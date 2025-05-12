@@ -2,23 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
+  // Hook para la navegación
   const navigate = useNavigate();
+  // Estado para almacenar la lista de administradores
   const [admins, setAdmins] = useState([]);
+  // Estado para manejar la carga de datos
   const [isLoading, setIsLoading] = useState(true);
+  // Estado para manejar errores
   const [error, setError] = useState('');
+  // Estado para el formulario de agregar
   const [isAddingAdmin, setIsAddingAdmin] = useState(false);
+  // Estado para el formulario de edición
   const [isEditingAdmin, setIsEditingAdmin] = useState(false);
+  // const [isDeletingAdmin, setIsDeletingAdmin] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({
     idCard: '',
-    name: '',  // Changed from nameAdmin to name
+    name: '',
     password: ''
   });
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const role = localStorage.getItem('role');
-    if (!token || role !== 'ROLE_ADMIN') {
+    if (!token) {
       navigate('/login');
     }
   }, [navigate]);
@@ -50,7 +56,8 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        localStorage.removeItem('idCard');
+        localStorage.removeItem('admin');
         navigate('/login');
       } else {
         setError('Error al cargar los administradores');
@@ -65,16 +72,13 @@ function AdminDashboard() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentAdmin({ 
-      ...currentAdmin, 
-      [name]: name === 'idCard' ? parseInt(value, 10) || '' : value 
-    });
+    setCurrentAdmin({ ...currentAdmin, [name]: name === 'idCard' ? parseInt(value, 10) || '' : value });
   };
 
   const resetForm = () => {
     setCurrentAdmin({
       idCard: '',
-      name: '',  // Changed from nameAdmin to name
+      name: '',
       password: ''
     });
   };
@@ -88,7 +92,7 @@ function AdminDashboard() {
   const handleEditAdmin = (admin) => {
     setCurrentAdmin({
       idCard: admin.idCard,
-      name: admin.name,  // Changed from nameAdmin to name
+      name: admin.name,
       password: '' // No mostramos la contraseña por seguridad
     });
     setIsEditingAdmin(true);
@@ -109,7 +113,8 @@ function AdminDashboard() {
         } else if (response.status === 401 || response.status === 403) {
           // Token expirado o inválido
           localStorage.removeItem('token');
-          localStorage.removeItem('role');
+          localStorage.removeItem('idCard');
+          localStorage.removeItem('name');
           navigate('/login');
         } else {
           setError('Error al eliminar el administrador');
@@ -123,7 +128,7 @@ function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!currentAdmin.idCard || !currentAdmin.name || (!isEditingAdmin && !currentAdmin.password)) {
       setError('Todos los campos son obligatorios');
       return;
@@ -134,16 +139,14 @@ function AdminDashboard() {
         ? `${import.meta.env.VITE_API_URL}/Administrador/${currentAdmin.idCard}`
         : `${import.meta.env.VITE_API_URL}/Administrador/register`;
       
+      // Determinar el método HTTP según si se está editando o agregando
       const method = isEditingAdmin ? 'PUT' : 'POST';
       
+      // Enviar la solicitud al servidor
       const response = await fetch(url, {
         method: method,
         headers: getAuthHeaders(),
-        body: JSON.stringify({
-          idCard: currentAdmin.idCard,
-          name: currentAdmin.name,  // Changed from nameAdmin to name
-          password: currentAdmin.password
-        }),
+        body: JSON.stringify(currentAdmin),
       });
 
       if (response.ok) {
@@ -156,11 +159,12 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        localStorage.removeItem('idCard');
+        localStorage.removeItem('name');
         navigate('/login');
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Error al procesar la solicitud');
+        const errorData = await response.text();
+        setError(`Error: ${errorData}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -170,7 +174,8 @@ function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem('idCard');
+    localStorage.removeItem('name');
     navigate('/login');
   };
 
@@ -185,8 +190,11 @@ function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores</h1>
+        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores </h1>
         <div className="flex items-center">
+          <span className="mr-4 text-white-700">
+            Bienvenido, {localStorage.getItem('name')}
+          </span>
           <button 
             onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-200"
@@ -251,7 +259,7 @@ function AdminDashboard() {
                           {admin.idCard}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {admin.name}  {/* Changed from nameAdmin to name */}
+                          {admin.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
@@ -308,9 +316,9 @@ function AdminDashboard() {
                     </label>
                     <input
                       type="text"
-                      name="name"  // Changed from nameAdmin to name
-                      id="name"    // Changed from nameAdmin to name
-                      value={currentAdmin.name}  // Changed from nameAdmin to name
+                      name="name"
+                      id="name"
+                      value={currentAdmin.name}
                       onChange={handleInputChange}
                       className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
                       required
