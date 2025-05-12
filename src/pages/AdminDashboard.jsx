@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
+  // Hook para la navegación
   const navigate = useNavigate();
+  // Estado para almacenar la lista de administradores
   const [admins, setAdmins] = useState([]);
+  // Estado para manejar la carga de datos
   const [isLoading, setIsLoading] = useState(true);
+  // Estado para manejar errores
   const [error, setError] = useState('');
+  // Estado para el formulario de agregar
   const [isAddingAdmin, setIsAddingAdmin] = useState(false);
+  // Estado para el formulario de edición
   const [isEditingAdmin, setIsEditingAdmin] = useState(false);
+  // const [isDeletingAdmin, setIsDeletingAdmin] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({
     idCard: '',
     name: '',
@@ -49,8 +56,8 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('adminId');
-        localStorage.removeItem('adminName');
+        localStorage.removeItem('idCard');
+        localStorage.removeItem('admin');
         navigate('/login');
       } else {
         setError('Error al cargar los administradores');
@@ -106,8 +113,8 @@ function AdminDashboard() {
         } else if (response.status === 401 || response.status === 403) {
           // Token expirado o inválido
           localStorage.removeItem('token');
-          localStorage.removeItem('adminId');
-          localStorage.removeItem('adminName');
+          localStorage.removeItem('idCard');
+          localStorage.removeItem('name');
           navigate('/login');
         } else {
           setError('Error al eliminar el administrador');
@@ -121,7 +128,7 @@ function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!currentAdmin.idCard || !currentAdmin.name || (!isEditingAdmin && !currentAdmin.password)) {
       setError('Todos los campos son obligatorios');
       return;
@@ -132,8 +139,10 @@ function AdminDashboard() {
         ? `${import.meta.env.VITE_API_URL}/Administrador/${currentAdmin.idCard}`
         : `${import.meta.env.VITE_API_URL}/Administrador/register`;
       
+      // Determinar el método HTTP según si se está editando o agregando
       const method = isEditingAdmin ? 'PUT' : 'POST';
       
+      // Enviar la solicitud al servidor
       const response = await fetch(url, {
         method: method,
         headers: getAuthHeaders(),
@@ -150,8 +159,8 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('adminId');
-        localStorage.removeItem('adminName');
+        localStorage.removeItem('idCard');
+        localStorage.removeItem('name');
         navigate('/login');
       } else {
         const errorData = await response.text();
@@ -165,8 +174,8 @@ function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('adminId');
-    localStorage.removeItem('adminName');
+    localStorage.removeItem('idCard');
+    localStorage.removeItem('name');
     navigate('/login');
   };
 
@@ -181,10 +190,10 @@ function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores</h1>
+        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores </h1>
         <div className="flex items-center">
-          <span className="mr-4 text-gray-700">
-            Bienvenido, {localStorage.getItem('adminName')}
+          <span className="mr-4 text-white-700">
+            Bienvenido, {localStorage.getItem('name')}
           </span>
           <button 
             onClick={handleLogout}
@@ -216,7 +225,7 @@ function AdminDashboard() {
             <h2 className="text-lg leading-6 font-medium text-gray-900">Lista de Administradores</h2>
             <button 
               onClick={handleAddAdmin}
-              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
+              className="bg-blue-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors duration-200"
             >
               Agregar Administrador
             </button>

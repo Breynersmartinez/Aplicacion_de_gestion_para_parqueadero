@@ -29,8 +29,8 @@ function Login() {
       if (response.ok && data.success) {
         // Guardar el token JWT y la información del administrador
         localStorage.setItem('token', data.token);
-        localStorage.setItem('adminId', data.admin.idCard);
-        localStorage.setItem('adminName', data.admin.name);
+        localStorage.setItem('idCard', data.user.idCard);
+        localStorage.setItem('name', data.user.name);
         navigate('/admin-dashboard');
       } else {
         setError(data.message || "Credenciales incorrectas. Por favor, inténtelo de nuevo.");
@@ -43,6 +43,7 @@ function Login() {
     }
   };
 
+  // Comprobar si el usuario ya está autenticado
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-00 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-black p-8 rounded-lg shadow-lg">
