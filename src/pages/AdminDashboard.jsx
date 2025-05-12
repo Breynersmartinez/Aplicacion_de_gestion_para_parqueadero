@@ -10,14 +10,15 @@ function AdminDashboard() {
   const [isEditingAdmin, setIsEditingAdmin] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({
     idCard: '',
-    name: '',
+    name: '',  // Changed from nameAdmin to name
     password: ''
   });
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    const role = localStorage.getItem('role');
+    if (!token || role !== 'ROLE_ADMIN') {
       navigate('/login');
     }
   }, [navigate]);
@@ -49,8 +50,7 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('adminId');
-        localStorage.removeItem('adminName');
+        localStorage.removeItem('role');
         navigate('/login');
       } else {
         setError('Error al cargar los administradores');
@@ -65,13 +65,16 @@ function AdminDashboard() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentAdmin({ ...currentAdmin, [name]: name === 'idCard' ? parseInt(value, 10) || '' : value });
+    setCurrentAdmin({ 
+      ...currentAdmin, 
+      [name]: name === 'idCard' ? parseInt(value, 10) || '' : value 
+    });
   };
 
   const resetForm = () => {
     setCurrentAdmin({
       idCard: '',
-      name: '',
+      name: '',  // Changed from nameAdmin to name
       password: ''
     });
   };
@@ -85,7 +88,7 @@ function AdminDashboard() {
   const handleEditAdmin = (admin) => {
     setCurrentAdmin({
       idCard: admin.idCard,
-      name: admin.name,
+      name: admin.name,  // Changed from nameAdmin to name
       password: '' // No mostramos la contraseña por seguridad
     });
     setIsEditingAdmin(true);
@@ -106,8 +109,7 @@ function AdminDashboard() {
         } else if (response.status === 401 || response.status === 403) {
           // Token expirado o inválido
           localStorage.removeItem('token');
-          localStorage.removeItem('adminId');
-          localStorage.removeItem('adminName');
+          localStorage.removeItem('role');
           navigate('/login');
         } else {
           setError('Error al eliminar el administrador');
@@ -137,7 +139,11 @@ function AdminDashboard() {
       const response = await fetch(url, {
         method: method,
         headers: getAuthHeaders(),
-        body: JSON.stringify(currentAdmin),
+        body: JSON.stringify({
+          idCard: currentAdmin.idCard,
+          name: currentAdmin.name,  // Changed from nameAdmin to name
+          password: currentAdmin.password
+        }),
       });
 
       if (response.ok) {
@@ -150,12 +156,11 @@ function AdminDashboard() {
       } else if (response.status === 401 || response.status === 403) {
         // Token expirado o inválido
         localStorage.removeItem('token');
-        localStorage.removeItem('adminId');
-        localStorage.removeItem('adminName');
+        localStorage.removeItem('role');
         navigate('/login');
       } else {
-        const errorData = await response.text();
-        setError(`Error: ${errorData}`);
+        const errorData = await response.json();
+        setError(errorData.message || 'Error al procesar la solicitud');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -165,8 +170,7 @@ function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('adminId');
-    localStorage.removeItem('adminName');
+    localStorage.removeItem('role');
     navigate('/login');
   };
 
@@ -183,9 +187,6 @@ function AdminDashboard() {
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
         <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores</h1>
         <div className="flex items-center">
-          <span className="mr-4 text-gray-700">
-            Bienvenido, {localStorage.getItem('adminName')}
-          </span>
           <button 
             onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-200"
@@ -216,7 +217,7 @@ function AdminDashboard() {
             <h2 className="text-lg leading-6 font-medium text-gray-900">Lista de Administradores</h2>
             <button 
               onClick={handleAddAdmin}
-              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-200"
+              className="bg-blue-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors duration-200"
             >
               Agregar Administrador
             </button>
@@ -250,7 +251,7 @@ function AdminDashboard() {
                           {admin.idCard}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {admin.name}
+                          {admin.name}  {/* Changed from nameAdmin to name */}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
@@ -307,9 +308,9 @@ function AdminDashboard() {
                     </label>
                     <input
                       type="text"
-                      name="name"
-                      id="name"
-                      value={currentAdmin.name}
+                      name="name"  // Changed from nameAdmin to name
+                      id="name"    // Changed from nameAdmin to name
+                      value={currentAdmin.name}  // Changed from nameAdmin to name
                       onChange={handleInputChange}
                       className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
                       required

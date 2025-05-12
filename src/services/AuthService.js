@@ -1,5 +1,3 @@
-// src/services/AuthService.js
-
 class AuthService {
     static login(token, idCard, name) {
       localStorage.setItem('token', token);
@@ -7,6 +5,7 @@ class AuthService {
       localStorage.setItem('name', name);
     }
   
+    // Store the token and user information in local storage
     static logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('idCard');
@@ -21,6 +20,7 @@ class AuthService {
       return localStorage.getItem('token');
     }
   
+    // Check if the user is authenticated and redirect to the login page if not
     static getAuthHeaders() {
       const token = this.getToken();
       return {
