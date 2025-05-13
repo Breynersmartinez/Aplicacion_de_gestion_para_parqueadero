@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminHomeDashboard from './pages/AdminHomeDashboard';
 
+// Importar los componentes necesarios
+// Importar las páginas necesarias
 const App = () => {
   return (
     <Router basename="/Aplicacion_de_gestion_para_parqueadero">
