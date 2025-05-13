@@ -9,7 +9,10 @@ import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminHomeDashboard from './pages/AdminHomeDashboard';
 
+// Importar los componentes necesarios
+// Importar las páginas necesarias
 const App = () => {
   return (
     <Router basename="/Aplicacion_de_gestion_para_parqueadero">
@@ -35,6 +38,10 @@ const App = () => {
         {/* Ruta de inicio de sesión */}
         <Route path="/login" element={<Login />} />
         
+
+        <Route path="/AdminHomeDashboard" element={<AdminHomeDashboard />} />
+   
+
         {/* Ruta para el panel de administración */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>

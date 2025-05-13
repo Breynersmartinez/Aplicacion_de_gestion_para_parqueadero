@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from "../assets/StellarCodeLogo.jpg";
+import logo from "../assets/StellarCodeLogo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function Login() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('idCard', data.user.idCard);
         localStorage.setItem('name', data.user.name);
-        navigate('/admin-dashboard');
+        navigate('/AdminHomeDashboard');
       } else {
         setError(data.message || "Credenciales incorrectas. Por favor, inténtelo de nuevo.");
       }
