@@ -9,6 +9,7 @@ import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminHomeDashboard from './pages/AdminHomeDashboard';
 
 const App = () => {
   return (
@@ -35,6 +36,10 @@ const App = () => {
         {/* Ruta de inicio de sesión */}
         <Route path="/login" element={<Login />} />
         
+
+        <Route path="/AdminHomeDashboard" element={<AdminHomeDashboard />} />
+   
+
         {/* Ruta para el panel de administración */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>

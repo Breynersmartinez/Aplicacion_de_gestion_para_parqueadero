@@ -45,11 +45,13 @@ function AdminDashboard() {
   const fetchAdmins = async () => {
     setIsLoading(true);
     try {
+      // Realizar la solicitud al servidor para obtener la lista de administradores
       const response = await fetch(`${import.meta.env.VITE_API_URL}/Administrador`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
-
+      // Verificar si la respuesta es exitosa
+      // Si la respuesta es exitosa, actualizar el estado de administradores
       if (response.ok) {
         const data = await response.json();
         setAdmins(data);
@@ -70,6 +72,7 @@ function AdminDashboard() {
     }
   };
 
+  // Manejar cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentAdmin({ ...currentAdmin, [name]: name === 'idCard' ? parseInt(value, 10) || '' : value });
@@ -82,7 +85,7 @@ function AdminDashboard() {
       password: ''
     });
   };
-
+/// Manejar el evento de agregar un nuevo administrador
   const handleAddAdmin = () => {
     setIsAddingAdmin(true);
     setIsEditingAdmin(false);
@@ -187,17 +190,20 @@ function AdminDashboard() {
     );
   }
 
+
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    /*Color del panel de administracion */
+ <div className="bg-gray-100 min-h-screen"> 
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 ">
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
-        <h1 className="text-2xl font-bold text-blue-900">Panel de Administración / Administradores </h1>
+        <h1 className="text-2xl font-bold text-black">Panel de Administración / Administradores </h1>
         <div className="flex items-center">
-          <span className="mr-4 text-white-700">
+          <span className="mr-4 text-blue-900">
             Bienvenido, {localStorage.getItem('name')}
           </span>
           <button 
             onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-200"
+            className="bg-red-600 hove</div>r:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-200"
           >
             Cerrar Sesión
           </button>
@@ -219,12 +225,17 @@ function AdminDashboard() {
         </div>
       )}
 
+      {/* Sección de lista de administradores */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Lista de administradores */}
         <div className="bg-white shadow overflow-hidden rounded-lg">
+          {/* Encabezado de la sección */}
           <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
+            {/* Título de la sección */}
             <h2 className="text-lg leading-6 font-medium text-gray-900">Lista de Administradores</h2>
             <button 
               onClick={handleAddAdmin}
+              
               className="bg-blue-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors duration-200"
             >
               Agregar Administrador
@@ -366,7 +377,9 @@ function AdminDashboard() {
         )}
       </div>
     </div>
+  </div>
   );
 }
+
 
 export default AdminDashboard;

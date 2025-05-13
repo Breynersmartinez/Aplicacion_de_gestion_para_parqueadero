@@ -1,7 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/StellarCodeLogo.jpg";
+import logo from "../assets/StellarCodeLogo.png";
 import { navItems } from "../constants";
 
 const Navbar = () => {
