@@ -13,7 +13,7 @@ const Navbar = () => {
   };
  
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/loginClient');
   };
 
   return (
@@ -34,7 +34,7 @@ const Navbar = () => {
           <div className="hidden lg:flex justify-center space-x-12 items-center">
           
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
-              Iniciar Sesión
+              Ingresar
             </button>
         
           </div>
@@ -55,7 +55,7 @@ const Navbar = () => {
             </ul>
             <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
               <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClick}>
-              Iniciar Sesión
+              Ingresar
               </a>
            
             </div>
