@@ -12,6 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminHomeDashboard from './pages/AdminHomeDashboard';
 import LoginClient from './pages/LoginClient';
 import ClientDashboard from './pages/ClientDashboard';
+import ClientSignUp from './pages/ClientSignUp';
 
 // Importar los componentes necesarios
 // Importar las páginas necesarias
@@ -40,6 +41,9 @@ const App = () => {
 
         {/* Ruta de inicio de sesión Cliente */}
           <Route path="/loginClient" element={<LoginClient />} />
+
+       <Route path="/clientSignUp" element={<ClientSignUp />} />
+
 
         {/* Ruta de inicio de sesión */}
         <Route path="/login" element={<Login />} />

@@ -47,6 +47,10 @@ function Login() {
   const handleGoHome = () => {
     navigate('/');
   };
+
+  const handleGoLogin = () => {
+    navigate('/clientSignUp');
+  };
   // Comprobar si el usuario ya está autenticado
   return (
  
@@ -115,9 +119,16 @@ function Login() {
             >
               {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
-     
+  
           </div>
 
+          <button
+              onClick={handleGoLogin}
+              className="text-blue-400 hover:text-blue-300 text-sm"
+              type="button"
+            >
+              ¿No tienes cuenta? Crear una cuenta
+            </button>
           <div>
 
      <button

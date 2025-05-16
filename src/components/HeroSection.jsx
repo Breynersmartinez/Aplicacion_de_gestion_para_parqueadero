@@ -27,7 +27,7 @@ const HeroSection = () => {
       
       <div className="flex justify-center my-10">
      <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClientClick}>
-              Cliente
+              Reservar
             </button>
         <a href="https://api.whatsapp.com/send/?phone=573138619952&text&type=phone_number&app_absent=0" className="py-3 px-4 mx-3 rounded-md border">
           Contactarse

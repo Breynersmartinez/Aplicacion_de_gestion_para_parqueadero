@@ -129,9 +129,19 @@ export const checklistItems = [
   },
 ];
 export const pricingOptions = [
-  {
-    title: "Básico",
-    price: "$50.000/mes",
+    {
+    title: "Carro",
+    price: "$4.000/Hora",
+    features: [
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
+    ],
+  },
+    {
+    title: "Carro",
+    price: "$24.000/Dia",
     features: [
       "Gestión de 1 vehículo",
       "Reservas en línea",
@@ -140,29 +150,49 @@ export const pricingOptions = [
     ],
   },
   {
-    title: "Estándar",
-    price: "$150.000/mes",
+    title: "Carro",
+    price: "$294.000/mes",
     features: [
-      "Gestión de hasta 2 vehículos",
-      "Reservas en línea y app móvil",
-      "Control de acceso con reconocimiento de matrículas",
-      "Soporte prioritario 24/7",
-      "Informes de ocupación mensuales",
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
+    ],
+  },
+
+    {
+    title: "Motocicleta",
+    price: "$1.000/Hora",
+    features: [
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
+    ],
+  },
+    {
+    title: "Motocicleta",
+    price: "$3.400/Dia",
+    features: [
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
     ],
   },
   {
-    title: "Premium",
-    price: "$500.000/mes",
+    title: "Motocicleta",
+    price: "$62.000/mes",
     features: [
-      "Gestión ilimitada de vehículos",
-      "Reservas en línea, app móvil y kioskos",
-      "Control de acceso con RFID y reconocimiento de matrículas",
-      "Soporte premium 24/7 con asistencia en sitio",
-      "Informes de ocupación en tiempo real",
-      "Integración con sistemas de pago electrónico",
+      "Gestión de 1 vehículo",
+      "Reservas en línea",
+      "Control de acceso básico",
+      "Soporte por correo electrónico",
     ],
   },
+
 ];
+
 
 export const resourcesLinks = [
   { href: "#", text: "Cómo Funciona" },
