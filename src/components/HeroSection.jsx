@@ -1,12 +1,16 @@
 import Parqueadero1 from "../assets/Parqueadero1.2.mp4";
 import Parqueadero2 from "../assets/Parqueadero1.3.mp4";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-    const handleLoginClientClick = () => {
+  const navigate = useNavigate();
+  const handleLoginClientClick = () => {
     navigate('/LoginClient');
   };
-  
+
   return (
+
+    
     <div className="flex flex-col items-center mt-6 lg:mt-20">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
         Bienvenido a
@@ -20,13 +24,11 @@ const HeroSection = () => {
         reservar espacios de estacionamiento de manera rápida y segura. Con
         nosotros, olvídate de dar vueltas buscando donde estacionar.
       </p>
+      
       <div className="flex justify-center my-10">
-     <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
-              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClientClick}>
-              Reservar
-              </a>
-             
-            </div>
+     <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClientClick}>
+              Cliente
+            </button>
         <a href="https://api.whatsapp.com/send/?phone=573138619952&text&type=phone_number&app_absent=0" className="py-3 px-4 mx-3 rounded-md border">
           Contactarse
         </a>
