@@ -39,6 +39,7 @@ const Navbar = () => {
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClientClick}>
               Cliente
             </button>
+            
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
               Empleado
             </button>
@@ -62,21 +63,18 @@ const Navbar = () => {
               ))}
             </ul>
             
-            <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
-              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClientClick}>
+            <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClientClick}>
               Cliente
-              </a>
-             
-            </div>
+            </button>
 
         <div className="py-2 px-1 rounded-md bg-gradient-to-r ">   
         </div>
 
-            <div className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
-            <a href="#" className="py-2 px-2  rounded-md" onClick={handleLoginClick}>
+           
+            <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClick}>
               Empleado
-              </a>
-            </div>
+            </button>
+           
 
           </div>
           
