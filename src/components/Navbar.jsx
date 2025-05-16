@@ -39,6 +39,7 @@ const Navbar = () => {
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClientClick}>
               Cliente
             </button>
+            
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
               Empleado
             </button>

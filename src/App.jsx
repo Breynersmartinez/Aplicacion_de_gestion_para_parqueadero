@@ -17,7 +17,7 @@ import ClientDashboard from './pages/ClientDashboard';
 // Importar las páginas necesarias
 const App = () => {
   return (
-    <Router basename="/Aplicacion_de_gestion_para_parqueadero">
+    <Router >
       <Routes>
         {/* Ruta principal */}
         <Route
