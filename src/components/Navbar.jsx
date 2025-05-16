@@ -12,8 +12,12 @@ const Navbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
  
-  const handleLoginClick = () => {
-    navigate('/loginClient');
+  const handleLoginClientClick = () => {
+    navigate('/LoginClient');
+  };
+
+     const handleLoginClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -31,12 +35,16 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="hidden lg:flex justify-center space-x-12 items-center">
-          
-            <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
-              Ingresar
+          <div className="hidden lg:flex justify-center items-center space-x-8 ml-8">
+            <button className="py-1 px-3 border rounded-md" onClick={handleLoginClientClick}>
+              Cliente
             </button>
-        
+            <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
+              Empleado
+            </button>
+          </div>
+          <div className="lg:hidden md:flex flex-col justify-end">
+            <button onClick={toggleNavbar}></button>
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
             <button onClick={toggleNavbar}>
@@ -53,14 +61,27 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
+            
             <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
-              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClick}>
-              Ingresar
+              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClientClick}>
+              Cliente
               </a>
-           
+             
             </div>
+
+        <div className="py-2 px-1 rounded-md bg-gradient-to-r ">   
+        </div>
+
+            <div className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
+            <a href="#" className="py-2 px-2  rounded-md" onClick={handleLoginClick}>
+              Empleado
+              </a>
+            </div>
+
           </div>
+          
         )}
+        
       </div>
     </nav>
   );

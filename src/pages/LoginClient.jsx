@@ -9,9 +9,7 @@ function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-   const handleLoginClick = () => {
-    navigate('/login');
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,10 +44,14 @@ function Login() {
       setIsLoading(false);
     }
   };
-
+  const handleGoHome = () => {
+    navigate('/');
+  };
   // Comprobar si el usuario ya está autenticado
   return (
+ 
     <div className="min-h-screen flex items-center justify-center bg-gray-00 py-12 px-4 sm:px-6 lg:px-8">
+  
       <div className="max-w-md w-full space-y-8 bg-black p-8 rounded-lg shadow-lg">
         <div className="flex flex-col items-center">
           <img className="h-20 w-auto mb-4" src={logo} alt="Logo" />
@@ -113,20 +115,19 @@ function Login() {
             >
               {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
-        
+     
           </div>
+
           <div>
 
+     <button
+      onClick={handleGoHome}
+      className="absolute top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
+      type="button"
+    >
+      Volver a inicio
+    </button>
             
-              <div>
-                    <button
-                        type="button"
-                        onClick={handleLoginClick}
-                        className="w-full py-2 px-4 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-green-700 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                    >
-                        Login empleado
-                    </button>
-                </div>
           </div>
         </form>
       </div>
