@@ -308,6 +308,18 @@ function AdminDashboard() {
                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Nombre
                           </th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Correo
+                          </th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Numero de Telefono
+                          </th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Direccion
+                          </th>
+                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Fecha registro
+                          </th>
                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Acciones
                           </th>
@@ -322,6 +334,22 @@ function AdminDashboard() {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                               {admin.name}
                             </td>
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {admin.email}
+                            </td>
+
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {admin.phoneNumber}
+                            </td>
+
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {admin.direction}
+                            </td>
+
+                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {admin.registrationDate}
+                            </td>
+                            
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                               <button
                                 onClick={() => handleEditAdmin(admin)}

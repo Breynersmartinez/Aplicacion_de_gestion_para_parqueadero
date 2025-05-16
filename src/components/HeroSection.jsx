@@ -2,6 +2,10 @@ import Parqueadero1 from "../assets/Parqueadero1.2.mp4";
 import Parqueadero2 from "../assets/Parqueadero1.3.mp4";
 
 const HeroSection = () => {
+    const handleLoginClientClick = () => {
+    navigate('/LoginClient');
+  };
+  
   return (
     <div className="flex flex-col items-center mt-6 lg:mt-20">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
@@ -17,14 +21,14 @@ const HeroSection = () => {
         nosotros, olvídate de dar vueltas buscando donde estacionar.
       </p>
       <div className="flex justify-center my-10">
-        <a
-          href="#"
-          className="bg-gradient-to-r from-blue-500 to-blue-800 py-3 px-4 mx-3 rounded-md"
-        >
-          Reservar
-        </a>
-        <a href="#" className="py-3 px-4 mx-3 rounded-md border">
-          Manual de usuario
+     <div className="py-2 px-3 rounded-md bg-gradient-to-r from-blue-500 to-blue-800">
+              <a href="#" className="py-2 px-3  rounded-md" onClick={handleLoginClientClick}>
+              Reservar
+              </a>
+             
+            </div>
+        <a href="https://api.whatsapp.com/send/?phone=573138619952&text&type=phone_number&app_absent=0" className="py-3 px-4 mx-3 rounded-md border">
+          Contactarse
         </a>
       </div>
       <div className="flex mt-10 justify-center">

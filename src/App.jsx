@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import FeatureSection from './components/FeatureSection';
@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminHomeDashboard from './pages/AdminHomeDashboard';
 import LoginClient from './pages/LoginClient';
+import ClientDashboard from './pages/ClientDashboard';
 
 // Importar los componentes necesarios
 // Importar las páginas necesarias
@@ -49,6 +50,10 @@ const App = () => {
 
         {/* Ruta para el panel de administración */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+     
+           {/* Ruta para el panel de administración de usuarios*/}
+        <Route path="/client-dashboard" element={<ClientDashboard />} />
+    
       </Routes>
     </Router>
   );
