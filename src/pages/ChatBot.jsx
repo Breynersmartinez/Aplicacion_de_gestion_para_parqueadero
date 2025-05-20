@@ -50,7 +50,7 @@ function ChatBot() {
     setIsTyping(true);
     
     try {
-      const response = await fetch('https://springboot-gemini-api-consumer.onrender.com/api/get-result-BreinLogic', {
+      const response = await fetch(`${import.meta.env.VITE_API_BREINLOGIC_URL}/api/get-result-BreinLogic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
