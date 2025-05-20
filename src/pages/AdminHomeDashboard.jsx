@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthService from '../services/AuthService';
 
+
+
 function AdminHomeDashboard() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -117,6 +119,7 @@ function AdminHomeDashboard() {
         </svg>
       )
     },
+    
     {
       id: 'rates',
       title: 'Tarifas',
@@ -151,6 +154,18 @@ function AdminHomeDashboard() {
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
+      )
+    },
+       {
+      id: 'bot',
+      title: 'Asistente Virtual',
+      description: 'Asistente Virtual BreinLogic',
+      path: '/chatBot',
+      color: 'bg-teal-500',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
       )
     }
   ];
@@ -187,18 +202,24 @@ function AdminHomeDashboard() {
             </svg>
             Inicio
           </Link>
-          <Link to="/admin-dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Gestion de Administradores
-          </Link>
+         <Link to="/admin-dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 11a3 3 0 100-6 3 3 0 000 6z" />
+  </svg>
+  Gestion de Administradores
+</Link>
             <Link to="/client-Dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Gestion de clientes
           </Link>
+           <Link to="/chatbot" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                      </svg>
+                      Asistente Virtual
+                    </Link>
           <Link to="/checkout" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

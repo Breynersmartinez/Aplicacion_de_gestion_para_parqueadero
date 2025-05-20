@@ -13,6 +13,7 @@ import AdminHomeDashboard from './pages/AdminHomeDashboard';
 import LoginClient from './pages/LoginClient';
 import ClientDashboard from './pages/ClientDashboard';
 import ClientSignUp from './pages/ClientSignUp';
+import ChatBot from './pages/ChatBot';
 
 // Importar los componentes necesarios
 // Importar las páginas necesarias
@@ -51,6 +52,9 @@ const App = () => {
 
         <Route path="/AdminHomeDashboard" element={<AdminHomeDashboard />} />
    
+        {/* Ruta para el panel de administración */}
+        <Route path="/chatBot" element={<ChatBot />} />
+     
 
         {/* Ruta para el panel de administración */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
