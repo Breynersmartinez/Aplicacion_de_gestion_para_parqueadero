@@ -6,7 +6,7 @@ const Pricing = () => {
     <div className="mt-20">
       <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">
         <section id="Precios">
-        Precios
+       Tarifas Del Parqueadero
         </section>
       </h2>
       <div className="flex flex-wrap">
@@ -23,7 +23,6 @@ const Pricing = () => {
               </p>
               <p className="mb-8">
                 <span className="text-5xl mt-6 mr-2">{option.price}</span>
-                <span className="text-neutral-400 tracking-tight">/Month</span>
               </p>
               <ul>
                 {option.features.map((feature, index) => (
