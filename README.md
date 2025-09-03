@@ -71,13 +71,35 @@ parqueadero-react/
 
 ## Capturas de pantalla 📸
 
-![Captura 1](https://parzibyte.me/blog/wp-content/uploads/2022/05/Software-para-parqueadero-Configurar-tarifas-de-cobro.png)  
-*Descripción de la captura 1.*
+ 
+*Pagina inicio*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.04.30_43019ea4.jpg>)
 
-![Captura 2](https://via.placeholder.com/800x400)  
-*Descripción de la captura 2.*
 
+*Registro Clientes*
+![alt text](img_md/image.png)
+
+*Inicio de sesion Clientes*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.11.13_08042782.jpg>)
+
+
+*Inicio de sesion empleados*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.11.13_d259503a.jpg>)
+
+
+*Panel de control*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.04.30_4fa49f51.jpg>)
+
+*Gestion de clientes*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.08.57_1f26e31e.jpg>)
+
+*Gestion de administradores*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.19.11_61373be4.jpg>)
+
+*Agente IA de apoyo*
+![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.21.52_d20782a3.jpg>)
 ---
+
 
 ## Cómo contribuir 🚀
 
