@@ -1,133 +1,179 @@
-hola
-
 ![MasterHead](https://okhosting.com/wp-content/uploads/Software.jpg)
-# Sistema de Gestión de Parqueadero 🚗
+# Parking Management System 🚗
 
-¡Bienvenido al proyecto de **Sistema de Gestión de Parqueadero**! Este es un proyecto desarrollado en React que permite gestionar la entrada, salida y estadísticas de vehículos en un parqueadero.
+Welcome to the **Parking Management System** project! This is a **React**-based application that allows managing vehicle entries, exits, and statistics in a parking lot.  
+The application consumes the **Parking Management API**, deployed at: [Parking Management API](https://parking-management-api-k4ih.onrender.com/)  
 
----
-## Características principales ✨
-
-- **Registro de vehículos**: Permite registrar la entrada de vehículos al parqueadero.
-- **Control de salida**: Registra la salida de vehículos y calcula el costo del estacionamiento.
-- **Estadísticas en tiempo real**: Muestra información como la cantidad de vehículos estacionados, ingresos del día y disponibilidad de espacios.
-- **Interfaz amigable**: Diseño intuitivo y fácil de usar.
+Frontend in production: [Website](https://aplicacion-de-gestion-para-parqueadero.vercel.app)
 
 ---
 
-## Tecnologías utilizadas 🛠️
+## Overview 🌐
 
-- **React**: Biblioteca de JavaScript para construir la interfaz de usuario.
-- **React Router**: Para manejar la navegación entre páginas.
-- **Tailwind CSS**: Framework de estilos para diseñar la interfaz.
-- **Axios**: Para realizar peticiones HTTP a una API (si se integra con un backend).
-- **LocalStorage**: Para almacenar datos temporalmente en el navegador (en caso de no usar backend).
+**StellarPark** is a web-based parking management system designed to handle:  
 
----
+- **Vehicle tracking**  
+- **User management** (clients and administrative staff)  
+- **Administrative operations**  
 
-## Instalación y configuración ⚙️
-
-Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
-
-1. **Clona el repositorio**:
-   ```bash
-   git clone https://github.com/tu-usuario/parqueadero-react.git
-   ```
-
-2. **Instala las dependencias**:
-   ```bash
-   cd parqueadero-react
-   npm install
-   ```
-
-3. **Ejecuta el servidor de desarrollo**:
-   ```bash
-   npm start
-   ```
-
-4. **Abre el proyecto en tu navegador**:
-   Visita `http://localhost:3000` para ver la aplicación en funcionamiento.
+The system supports three user types: public visitors, registered clients, and administrative personnel, each with tailored interfaces and functionality.  
 
 ---
 
-## Estructura del proyecto 📂
+## Key Features ✨
+
+- **Vehicle registration**: Record vehicle entries.  
+- **Exit control**: Track vehicle exits and calculate parking fees.  
+- **Real-time statistics**: Shows parked vehicles, daily revenue, and available spaces.  
+- **Multi-user management**: Different interfaces for clients and admins with role-based access.  
+- **AI assistant**: ChatBot available to all authenticated users.  
+- **User-friendly, responsive UI**: Mobile-first design using Tailwind CSS.  
+
+---
+
+## System Architecture 🏗️
+
+- **Frontend**: React SPA using **Vite** for development and build.  
+- **Routing**: React Router DOM for client-side navigation.  
+- **Styling**: Tailwind CSS, mobile-first and responsive.  
+- **HTTP client**: Axios for backend API requests.  
+- **State management**: useState and centralized services (AuthService) for session handling.  
+- **Deployment**: Vercel for static hosting; GitHub Pages optional.  
+- **AI Integration**: Virtual Assistant via `VITE_API_BREINLOGIC_URL`.  
+
+**Key Components**:  
+- `App.jsx`: Entry point with route mapping and user flow.  
+- `Login.jsx` and `LoginClient.jsx`: Authentication handling for different roles.  
+- `AdminHomeDashboard.jsx`: Admin dashboard with session control.  
+- `services/AuthService.js`: Token management and authentication verification.  
+
+---
+
+## Technologies Used 🛠️
+
+| Technology | Purpose | Version |
+|------------|---------|--------|
+| React | UI framework and components | ^18.2.0 |
+| Vite | Build tool and dev server | ^5.1.4 |
+| React Router DOM | Client-side routing | ^7.2.0 |
+| Tailwind CSS | Utility-first CSS framework | ^3.4.1 |
+| Axios | HTTP client | ^1.8.4 |
+| Lucide React | Icon library | ^0.344.0 |
+
+---
+
+## Installation & Setup ⚙️
+
+### Local
+1. Clone repository:
+```bash
+git clone https://github.com/tu-usuario/parqueadero-react.git
+cd parqueadero-react
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Run development server:
+```bash
+npm start
+```
+
+4. Open `http://localhost:3000` in your browser.
+
+### Environment Variables
+
+Create a `.env` file with the following variables:
+
+```env
+VITE_API_URL=https://parking-management-api-k4ih.onrender.com
+VITE_API_BREINLOGIC_URL=<AI service endpoint>
+```
+
+---
+
+## Project Structure 📂
 
 ```
 parqueadero-react/
-├── public/                  # Archivos públicos (HTML, imágenes, etc.)
-├── src/                     # Código fuente del proyecto
-│   ├── components/          # Componentes reutilizables
-│   ├── pages/               # Páginas de la aplicación
-│   ├── services/            # Lógica para manejar datos (API, LocalStorage, etc.)
-│   ├── styles/              # Archivos de estilos (CSS, Tailwind, etc.)
-│   ├── App.js               # Componente principal
-│   └── index.js             # Punto de entrada de la aplicación
-├── .gitignore               # Archivos y carpetas ignorados por Git
-├── package.json             # Dependencias y scripts del proyecto
-└── README.md                # Este archivo
+├── public/                  # Public files (HTML, images, etc.)
+├── src/                     # Source code
+│   ├── assets/              # Images and logos
+│   ├── components/          # Reusable components
+│   ├── pages/               # Application pages
+│   ├── services/            # Business logic and API
+│   ├── styles/              # CSS / Tailwind
+│   ├── App.jsx              # Main component
+│   └── main.jsx             # React/Vite entry point
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
 ---
 
-## Capturas de pantalla 📸
+## Screenshots 📸
 
- 
-*Pagina inicio*
+*Home Page*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.04.30_43019ea4.jpg>)
 
-
-*Registro Clientes*
+*Client Registration*  
 ![alt text](img_md/image.png)
 
-*Inicio de sesion Clientes*
+*Client Login*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.11.13_08042782.jpg>)
 
-
-*Inicio de sesion empleados*
+*Employee Login*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.11.13_d259503a.jpg>)
 
-
-*Panel de control*
+*Dashboard*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.04.30_4fa49f51.jpg>)
 
-*Gestion de clientes*
+*Client Management*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.08.57_1f26e31e.jpg>)
 
-*Gestion de administradores*
+*Admin Management*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.19.11_61373be4.jpg>)
 
-*Agente IA de apoyo*
+*AI Support Agent*  
 ![alt text](<img_md/Imagen de WhatsApp 2025-09-03 a las 11.21.52_d20782a3.jpg>)
----
-
-
-## Cómo contribuir 🚀
-
-¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, sigue estos pasos:
-
-1. Haz un **fork** del repositorio.
-2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit (`git commit -m 'Añade nueva funcionalidad'`).
-4. Sube los cambios a tu rama (`git push origin feature/nueva-funcionalidad`).
-5. Abre un **Pull Request** y describe tus cambios.
 
 ---
 
-## Licencia 📄
+## Login Flow 🔑
 
-Este proyecto está bajo la licencia **MIT**. Para más detalles, consulta el archivo [LICENSE](LICENSE).
-
----
-
-## Contacto 📧
-
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
-
-- **Nombre**: [Tu nombre]
-- **Email**: [breynersmartinezmunoz@gmail.com]
-- **GitHub**: [@tu-usuario](https://github.com/tu-usuario)
+* **Admins/Employees**: `Login.jsx` → POST to `${VITE_API_URL}/Administrador/login`  
+* **Clients**: `LoginClient.jsx` → POST to `${VITE_API_URL}/Cliente/login`  
+* Token management via `AuthService.js` → localStorage  
+* Redirect to appropriate dashboard if session is valid  
 
 ---
 
-¡Gracias por visitar este proyecto! Espero que te sea útil. 😊
-```
+## Contributing 🚀
+
+1. Fork the repository.  
+2. Create a branch: `git checkout -b feature/new-feature`.  
+3. Make changes and commit: `git commit -m 'Add new feature'`.  
+4. Push the branch: `git push origin feature/new-feature`.  
+5. Open a **Pull Request** describing your changes.  
+
+---
+
+## License 📄
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Contact 📧
+
+* **Name**: Breiner Martínez  
+* **Email**: [breynersmartinezmunoz@gmail.com](mailto:breynersmartinezmunoz@gmail.com)  
+* **GitHub**: [@Breynersmartinez](https://github.com/Breynersmartinez)  
+* **Website**: [https://aplicacion-de-gestion-para-parqueadero.vercel.app](https://aplicacion-de-gestion-para-parqueadero.vercel.app)
+
+---
+
+Thank you for visiting the project! 😊
