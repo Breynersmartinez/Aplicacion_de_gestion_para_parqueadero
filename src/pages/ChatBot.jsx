@@ -177,7 +177,7 @@ function ChatBot() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-lg font-semibold">Asistente Virtual StellarPark</h2>
+                <h2 className="text-lg font-semibold">Asistente Virtual YourParking</h2>
                 <p className="text-sm text-blue-100">En línea</p>
               </div>
             </div>

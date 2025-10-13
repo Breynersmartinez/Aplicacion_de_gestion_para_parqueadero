@@ -10,7 +10,7 @@ import Testimonials from './components/Testimonials';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminHomeDashboard from './pages/AdminHomeDashboard';
-import LoginClient from './pages/LoginClient';
+
 import ClientDashboard from './pages/ClientDashboard';
 import ClientSignUp from './pages/ClientSignUp';
 import ChatBot from './pages/ChatBot';
@@ -40,8 +40,7 @@ const App = () => {
         />
 
 
-        {/* Ruta de inicio de sesión Cliente */}
-          <Route path="/loginClient" element={<LoginClient />} />
+      
 
        <Route path="/clientSignUp" element={<ClientSignUp />} />
 

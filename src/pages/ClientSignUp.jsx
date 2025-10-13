@@ -17,7 +17,6 @@ function ClientSignUp() {
   const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Actualizar cualquier campo del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,7 +38,14 @@ function ClientSignUp() {
       return;
     }
 
-    // Crear objeto para enviar al backend
+    // Validar longitud mínima de contraseña
+    if (formData.password.length < 3) {
+      setError('La contraseña debe tener al menos 3 caracteres');
+      setIsLoading(false);
+      return;
+    }
+
+    // Crear objeto para enviar al backend con role: "USER"
     const registrationData = {
       idCard: parseInt(formData.idCard),
       name: formData.name,
@@ -47,11 +53,11 @@ function ClientSignUp() {
       password: formData.password,
       phoneNumber: formData.phoneNumber,
       direction: formData.direction,
-      registrationDate: new Date().toISOString().split('T')[0] // Formato YYYY-MM-DD
+      role: "USER" // Siempre registrar como USER
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Cliente/register`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registrationData),
@@ -59,10 +65,10 @@ function ClientSignUp() {
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      if (response.ok && data.token) {
         setSuccess('Registro exitoso. Redirigiendo al inicio de sesión...');
         setTimeout(() => {
-          navigate('/loginClient');
+          navigate('/login');
         }, 2000);
       } else {
         setError(data.message || "Error al registrar. Por favor, inténtelo de nuevo.");
@@ -80,17 +86,20 @@ function ClientSignUp() {
   };
 
   const handleGoLogin = () => {
-    navigate('/loginClient');
+    navigate('/login');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-00 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-black p-8 rounded-lg shadow-lg">
         <div className="flex flex-col items-center">
           <img className="h-20 w-auto mb-4" src={logo} alt="Logo" />
           <h2 className="text-center text-2xl font-bold text-white">
             Crear Cuenta
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            Regístrate para acceder a nuestros servicios
+          </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -116,7 +125,7 @@ function ClientSignUp() {
             {/* Nombre */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-1">
-                Nombre
+                Nombre Completo
               </label>
               <input
                 id="name"
@@ -134,7 +143,7 @@ function ClientSignUp() {
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-1">
-                Correo electrónico
+                Correo Electrónico
               </label>
               <input
                 id="email"
@@ -145,7 +154,7 @@ function ClientSignUp() {
                 onChange={handleChange}
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Ingrese su correo electrónico"
+                placeholder="ejemplo@correo.com"
               />
             </div>
             
@@ -159,11 +168,12 @@ function ClientSignUp() {
                 name="password"
                 type="password"
                 required
+                minLength="3"
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Ingrese su contraseña"
+                placeholder="Mínimo 3 caracteres"
               />
             </div>
             
@@ -177,6 +187,7 @@ function ClientSignUp() {
                 name="confirmPassword"
                 type="password"
                 required
+                minLength="3"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -259,7 +270,7 @@ function ClientSignUp() {
             
             <button
               onClick={handleGoHome}
-              className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
+              className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition text-sm"
               type="button"
             >
               Volver a inicio

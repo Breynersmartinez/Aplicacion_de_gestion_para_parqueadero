@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const handleLoginClientClick = () => {
-    navigate('/LoginClient');
+  const handleLoginClick = () => {
+    navigate('/Login');
   };
 
   return (
@@ -16,17 +16,17 @@ const HeroSection = () => {
         Bienvenido a
         <span className="bg-gradient-to-r from-blue-500 to-blue-800 text-transparent bg-clip-text">
           {" "}
-          StellarPark
+          YourParking
         </span>
       </h1>
       <p className="mt-10 text-lg text-center text-neutral-500 max-w-4xl">
-        StellarPark es una plataforma innovadora que te permite encontrar y
+        YourParking es una plataforma innovadora que te permite encontrar y
         reservar espacios de estacionamiento de manera rápida y segura. Con
         nosotros, olvídate de dar vueltas buscando donde estacionar.
       </p>
       
       <div className="flex justify-center my-10">
-     <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClientClick}>
+     <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClick}>
               Reservar
             </button>
         <a href="https://api.whatsapp.com/send/?phone=573138619952&text&type=phone_number&app_absent=0" className="py-3 px-4 mx-3 rounded-md border">

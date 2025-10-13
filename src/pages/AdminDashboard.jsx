@@ -197,7 +197,7 @@ function AdminDashboard() {
       <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white">
         <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
           <div className="flex items-center">
-            <span className="text-xl font-bold">StellarPark</span>
+            <span className="text-xl font-bold">YourParking</span>
           </div>
         </div>
         <nav className="mt-5">
