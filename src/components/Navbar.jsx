@@ -12,9 +12,7 @@ const Navbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
  
-  const handleLoginClientClick = () => {
-    navigate('/LoginClient');
-  };
+ 
 
      const handleLoginClick = () => {
     navigate('/login');
@@ -26,7 +24,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center flex-shrink-0">
             <img className="h-10 w-10 mr-2" src={logo} alt="Logo" />
-            <span className="text-xl tracking-tight">StellarPark</span>
+            <span className="text-xl tracking-tight">YourParking</span>
           </div>
           <ul className="hidden lg:flex ml-14 space-x-12">
             {navItems.map((item, index) => (
@@ -36,12 +34,10 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="hidden lg:flex justify-center items-center space-x-8 ml-8">
-            <button className="py-1 px-3 border rounded-md" onClick={handleLoginClientClick}>
-              Cliente
-            </button>
+          
             
             <button className="py-1 px-3 border rounded-md" onClick={handleLoginClick}>
-              Empleado
+              Ingresar
             </button>
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
@@ -63,16 +59,14 @@ const Navbar = () => {
               ))}
             </ul>
             
-            <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClientClick}>
-              Cliente
-            </button>
+          
 
         <div className="py-2 px-1 rounded-md bg-gradient-to-r ">   
         </div>
 
            
             <button className="py-2 px-1 rounded-md bg-gradient-to-r from-blue-500 to-blue-800" onClick={handleLoginClick}>
-              Empleado
+              Ingresar
             </button>
            
 
