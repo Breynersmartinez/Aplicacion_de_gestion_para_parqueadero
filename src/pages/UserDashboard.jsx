@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function AdminDashboard() {
-  // Hook para la navegación
+function UserDashboard() {
   const navigate = useNavigate();
-  // Estado para almacenar la lista de administradores
   const [admins, setAdmins] = useState([]);
-  // Estado para manejar la carga de datos
   const [isLoading, setIsLoading] = useState(true);
-  // Estado para manejar errores
   const [error, setError] = useState('');
-  // Estado para el formulario de agregar
   const [isAddingAdmin, setIsAddingAdmin] = useState(false);
-  // Estado para el formulario de edición
   const [isEditingAdmin, setIsEditingAdmin] = useState(false);
-  // const [isDeletingAdmin, setIsDeletingAdmin] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({
     idCard: '',
-    name: '',
-    password: ''
+    identificationType: 'CC',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    phoneNumber: '',
+    direction: '',
+    role: 'ADMIN',
+    active: true
   });
 
-  // Verificar si el usuario está autenticado
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -29,7 +28,6 @@ function AdminDashboard() {
     }
   }, [navigate]);
 
-  // Cargar la lista de administradores
   useEffect(() => {
     fetchAdmins();
   }, []);
@@ -44,22 +42,20 @@ function AdminDashboard() {
 
   const fetchAdmins = async () => {
     setIsLoading(true);
+    setError('');
     try {
-      // Realizar la solicitud al servidor para obtener la lista de administradores
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Administrador`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
-      // Verificar si la respuesta es exitosa
-      // Si la respuesta es exitosa, actualizar el estado de administradores
+
       if (response.ok) {
         const data = await response.json();
         setAdmins(data);
       } else if (response.status === 401 || response.status === 403) {
-        // Token expirado o inválido
         localStorage.removeItem('token');
         localStorage.removeItem('idCard');
-        localStorage.removeItem('admin');
+        localStorage.removeItem('firstName');
         navigate('/login');
       } else {
         setError('Error al cargar los administradores');
@@ -72,21 +68,29 @@ function AdminDashboard() {
     }
   };
 
-  // Manejar cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentAdmin({ ...currentAdmin, [name]: name === 'idCard' ? parseInt(value, 10) || '' : value });
+    setCurrentAdmin({ 
+      ...currentAdmin, 
+      [name]: name === 'idCard' ? (value ? parseInt(value, 10) : '') : value 
+    });
   };
 
   const resetForm = () => {
     setCurrentAdmin({
       idCard: '',
-      name: '',
-      password: ''
+      identificationType: 'CC',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      phoneNumber: '',
+      direction: '',
+      role: 'ADMIN',
+      active: true
     });
   };
 
-  // Manejar el evento de agregar un nuevo administrador
   const handleAddAdmin = () => {
     setIsAddingAdmin(true);
     setIsEditingAdmin(false);
@@ -96,8 +100,15 @@ function AdminDashboard() {
   const handleEditAdmin = (user) => {
     setCurrentAdmin({
       idCard: user.idCard,
-      name: user.name,
-      password: '' // No mostramos la contraseña por seguridad
+      identificationType: user.identificationType,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: '',
+      phoneNumber: user.phoneNumber,
+      direction: user.direction,
+      role: user.role,
+      active: user.active
     });
     setIsEditingAdmin(true);
     setIsAddingAdmin(false);
@@ -106,19 +117,17 @@ function AdminDashboard() {
   const handleDeleteAdmin = async (idCard) => {
     if (window.confirm('¿Está seguro de que desea eliminar este administrador?')) {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/Administrador/${idCard}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${idCard}`, {
           method: 'DELETE',
           headers: getAuthHeaders(),
         });
 
-        if (response.ok) {
-          // Actualizar la lista de administradores
+        if (response.ok || response.status === 204) {
           fetchAdmins();
         } else if (response.status === 401 || response.status === 403) {
-          // Token expirado o inválido
           localStorage.removeItem('token');
           localStorage.removeItem('idCard');
-          localStorage.removeItem('name');
+          localStorage.removeItem('firstName');
           navigate('/login');
         } else {
           setError('Error al eliminar el administrador');
@@ -133,42 +142,48 @@ function AdminDashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!currentAdmin.idCard || !currentAdmin.name || (!isEditingAdmin && !currentAdmin.password)) {
-      setError('Todos los campos son obligatorios');
+    if (!currentAdmin.idCard || !currentAdmin.firstName || !currentAdmin.lastName || 
+        !currentAdmin.email || (!isEditingAdmin && !currentAdmin.password)) {
+      setError('Todos los campos obligatorios deben ser completados');
       return;
     }
 
     try {
-      const url = isEditingAdmin 
-        ? `${import.meta.env.VITE_API_URL}/Administrador/${currentAdmin.idCard}`
-        : `${import.meta.env.VITE_API_URL}/Administrador/register`;
+      let url, method, body;
       
-      // Determinar el método HTTP según si se está editando o agregando
-      const method = isEditingAdmin ? 'PUT' : 'POST';
-      
-      // Enviar la solicitud al servidor
+      if (isEditingAdmin) {
+        url = `${import.meta.env.VITE_API_URL}/api/users/${currentAdmin.idCard}`;
+        method = 'PUT';
+        body = { ...currentAdmin };
+        if (!currentAdmin.password) {
+          delete body.password;
+        }
+      } else {
+        url = `${import.meta.env.VITE_API_URL}/api/auth/register`;
+        method = 'POST';
+        body = { ...currentAdmin };
+      }
+
       const response = await fetch(url, {
         method: method,
         headers: getAuthHeaders(),
-        body: JSON.stringify(currentAdmin),
+        body: JSON.stringify(body),
       });
 
       if (response.ok) {
-        // Actualizar la lista de administradores
         fetchAdmins();
-        // Limpiar el formulario
         resetForm();
         setIsAddingAdmin(false);
         setIsEditingAdmin(false);
+        setError('');
       } else if (response.status === 401 || response.status === 403) {
-        // Token expirado o inválido
         localStorage.removeItem('token');
         localStorage.removeItem('idCard');
-        localStorage.removeItem('name');
+        localStorage.removeItem('firstName');
         navigate('/login');
       } else {
-        const errorData = await response.text();
-        setError(`Error: ${errorData}`);
+        const errorData = await response.json();
+        setError(errorData.message || 'Error al guardar el administrador');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -179,7 +194,7 @@ function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('idCard');
-    localStorage.removeItem('name');
+    localStorage.removeItem('firstName');
     navigate('/login');
   };
 
@@ -193,7 +208,6 @@ function AdminDashboard() {
 
   return (
     <div className="flex bg-gray-100 min-h-screen">
-      {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white">
         <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
           <div className="flex items-center">
@@ -210,24 +224,19 @@ function AdminDashboard() {
             </svg>
             Inicio
           </Link>
-      <Link to="/admin-dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 11a3 3 0 100-6 3 3 0 000 6z" />
-  </svg>
-  Gestion de Administradores
-</Link>
-               <Link to="/client-Dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                         </svg>
-                         Gestion de clientes
-                       </Link>
-                 <Link to="/chatbot" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                            </svg>
-                            Asistente Virtual
-                          </Link>
+       
+          <Link to="/user-Dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Gestión de usuarios
+          </Link>
+          <Link to="/chatbot" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            Asistente Virtual
+          </Link>
           <Link to="/checkout" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -249,14 +258,13 @@ function AdminDashboard() {
         </nav>
       </div>
 
-      {/* Contenido principal con margen izquierdo para el sidebar */}
       <div className="ml-64 w-full">
         <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center pb-5 border-b border-gray-200 mb-8">
             <h1 className="text-2xl font-bold text-black">Panel de Administración / Administradores</h1>
             <div className="flex items-center">
               <span className="mr-4 text-blue-900">
-                Bienvenido, {localStorage.getItem('name')}
+                Bienvenido, {localStorage.getItem('firstName')}
               </span>
               <button 
                 onClick={handleLogout}
@@ -282,13 +290,9 @@ function AdminDashboard() {
             </div>
           )}
 
-          {/* Sección de lista de administradores */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Lista de administradores */}
             <div className="bg-white shadow overflow-hidden rounded-lg">
-              {/* Encabezado de la sección */}
               <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
-                {/* Título de la sección */}
                 <h2 className="text-lg leading-6 font-medium text-gray-900">Lista de Administradores</h2>
                 <button 
                   onClick={handleAddAdmin}
@@ -308,54 +312,35 @@ function AdminDashboard() {
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
                         <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Cédula
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nombre
-                          </th>
-                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Correo
-                          </th>
-                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Numero de Telefono
-                          </th>
-                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Direccion
-                          </th>
-                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Fecha registro
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Acciones
-                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo ID</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cédula</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Correo</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Teléfono</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha Registro</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rol</th>
+                          
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
                         {admins.map((admin) => (
                           <tr key={admin.idCard} className="hover:bg-gray-50">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.identificationType}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.idCard}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.firstName} {admin.lastName}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.email}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.phoneNumber}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.idCard}
+                              {new Date(admin.registrationDate).toLocaleDateString()}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.name}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{admin.role}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm">
+                              <span className={`px-2 py-1 rounded ${admin.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                {admin.active ? 'Activo' : 'Inactivo'}
+                              </span>
                             </td>
-                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.email}
-                            </td>
-
-                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.phoneNumber}
-                            </td>
-
-                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.direction}
-                            </td>
-
-                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                              {admin.registrationDate}
-                            </td>
-                            
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                               <button
                                 onClick={() => handleEditAdmin(admin)}
@@ -388,54 +373,131 @@ function AdminDashboard() {
                 </div>
                 <div className="border-t border-gray-200 px-4 py-5 sm:p-6">
                   <form onSubmit={handleSubmit}>
-                    <div className="space-y-6">
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700">Tipo de Identificación</label>
+                          <select
+                            name="identificationType"
+                            value={currentAdmin.identificationType}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                            required
+                          >
+                            <option value="TI">TI</option>
+                            <option value="CC">CC</option>
+                            <option value="NUIP">NUIP</option>
+                            <option value="CE">CE</option>
+                            <option value="P">Pasaporte</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700">Cédula</label>
+                          <input
+                            type="number"
+                            name="idCard"
+                            value={currentAdmin.idCard}
+                            onChange={handleInputChange}
+                            disabled={isEditingAdmin}
+                            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700">Nombre</label>
+                          <input
+                            type="text"
+                            name="firstName"
+                            value={currentAdmin.firstName}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700">Apellido</label>
+                          <input
+                            type="text"
+                            name="lastName"
+                            value={currentAdmin.lastName}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                   
+
                       <div>
-                        <label htmlFor="idCard" className="block text-sm font-medium text-gray-700">
-                          Cédula
-                        </label>
+                        <label className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                         <input
-                          type="number"
-                          name="idCard"
-                          id="idCard"
-                          value={currentAdmin.idCard}
+                          type="email"
+                          name="email"
+                          value={currentAdmin.email}
                           onChange={handleInputChange}
-                          disabled={isEditingAdmin}
                           className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
                           required
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                          Nombre
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          id="name"
-                          value={currentAdmin.name}
-                          onChange={handleInputChange}
-                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                          {isEditingAdmin ? 'Nueva Contraseña (dejar en blanco para mantener la actual)' : 'Contraseña'}
+                        <label className="block text-sm font-medium text-gray-700">
+                          {isEditingAdmin ? 'Nueva Contraseña (dejar vacío para no cambiar)' : 'Contraseña'}
                         </label>
                         <input
                           type="password"
                           name="password"
-                          id="password"
                           value={currentAdmin.password}
                           onChange={handleInputChange}
                           className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
                           required={!isEditingAdmin}
                         />
                       </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">Teléfono</label>
+                        <input
+                          type="tel"
+                          name="phoneNumber"
+                          value={currentAdmin.phoneNumber}
+                          onChange={handleInputChange}
+                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">Dirección</label>
+                        <input
+                          type="text"
+                          name="direction"
+                          value={currentAdmin.direction}
+                          onChange={handleInputChange}
+                          className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
                     </div>
                     
+                    <div>
+                          <label className="block text-sm font-medium text-gray-700">Rol</label>
+                          <select
+                            name="role"
+                            value={currentAdmin.role}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                            required
+                          >
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="OPERATOR">OPERATOR</option>
+                            <option value="USER">VIGILANTE</option>
+                            <option value="USER">SUPERVISOR</option>
+                            <option value="USER">USER</option>
+                          </select>
+                        </div>
+
                     <div className="mt-6 flex items-center space-x-4">
                       <button
                         type="submit"
@@ -466,4 +528,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default UserDashboard;

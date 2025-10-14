@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import AuthService from '../services/AuthService';
-
-
 
 function AdminHomeDashboard() {
   const navigate = useNavigate();
@@ -16,35 +13,40 @@ function AdminHomeDashboard() {
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
-    if (!AuthService.isAuthenticated()) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       navigate('/login');
     } else {
       setIsLoading(false);
+      loadStats();
     }
   }, [navigate]);
 
-  // Simulación de carga de estadísticas
-  useEffect(() => {
-    // En un caso real, aquí cargarías datos desde tu API
-    const loadStats = async () => {
-      try {
-        // Simular carga de datos
-        setTimeout(() => {
-          setStats({
-            spacesAvailable: 45,
-            todayEntries: 78,
-            activeReservations: 12,
-            dailyRevenue: 560000
-          });
-          setIsLoading(false);
-        }, 800);
-      } catch (error) {
-        console.error('Error al cargar estadísticas:', error);
-      }
-    };
-
-    loadStats();
-  }, []);
+  const loadStats = async () => {
+    try {
+      // TODO: En producción, conectar con el backend real
+      // const response = await fetch(`${import.meta.env.VITE_API_URL}/api/stats/dashboard`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${localStorage.getItem('token')}`
+      //   }
+      // });
+      // const data = await response.json();
+      
+      // Simulación temporal de datos
+      setTimeout(() => {
+        setStats({
+          spacesAvailable: 45,
+          todayEntries: 78,
+          activeReservations: 12,
+          dailyRevenue: 560000
+        });
+        setIsLoading(false);
+      }, 800);
+    } catch (error) {
+      console.error('Error al cargar estadísticas:', error);
+      setIsLoading(false);
+    }
+  };
 
   const modules = [
     {
@@ -108,10 +110,10 @@ function AdminHomeDashboard() {
       )
     },
     {
-      id: 'clients',
-      title: 'Gestión de clientes',
-      description: 'Administrar información de clientes',
-      path: '/clients',
+      id: 'USER',
+      title: 'Gestión de usuarios',
+      description: 'Administrar información de usuarios',
+      path: '/user-dashboard',
       color: 'bg-indigo-500',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,7 +121,6 @@ function AdminHomeDashboard() {
         </svg>
       )
     },
-    
     {
       id: 'rates',
       title: 'Tarifas',
@@ -144,35 +145,36 @@ function AdminHomeDashboard() {
         </svg>
       )
     },
+  
     {
-      id: 'admins',
-      title: 'Administradores',
-      description: 'Gestionar usuarios administradores',
-      path: '/admin-dashboard',
-      color: 'bg-teal-500',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-       {
       id: 'bot',
       title: 'Asistente Virtual',
-      description: 'Asistente Virtual BreinLogic',
-      path: '/chatBot',
-      color: 'bg-teal-500',
+      description: 'Asistente Virtual BrainLogic',
+      path: '/chatbot',
+      color: 'bg-cyan-500',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
       )
     }
   ];
 
   const handleLogout = () => {
-    AuthService.logout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('idCard');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
     navigate('/login');
+  };
+
+  // Obtener nombre completo del usuario
+  const getUserFullName = () => {
+    const firstName = localStorage.getItem('firstName') || '';
+    const lastName = localStorage.getItem('lastName') || '';
+    return `${firstName} ${lastName}`.trim() || 'Usuario';
   };
 
   if (isLoading) {
@@ -196,30 +198,25 @@ function AdminHomeDashboard() {
           <div className="px-4 mb-2 text-xs font-semibold text-gray-400 uppercase">
             Navegación
           </div>
-          <Link to="/admin-home" className="flex items-center px-4 py-3 text-white bg-blue-600">
+          <Link to="/AdminHomeDashboard" className="flex items-center px-4 py-3 text-white bg-blue-600">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             Inicio
           </Link>
-         <Link to="/admin-dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 11a3 3 0 100-6 3 3 0 000 6z" />
-  </svg>
-  Gestion de Administradores
-</Link>
-            <Link to="/client-Dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+        
+          <Link to="/user-Dashboard" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Gestion de clientes
+            Gestión de usuarios
           </Link>
-           <Link to="/chatbot" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                      </svg>
-                      Asistente Virtual
-                    </Link>
+          <Link to="/chatbot" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            Asistente Virtual
+          </Link>
           <Link to="/checkout" className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -247,7 +244,7 @@ function AdminHomeDashboard() {
           <h1 className="text-2xl font-bold text-gray-800">Navegación / Inicio</h1>
           <div className="flex items-center">
             <span className="mr-4 text-gray-700">
-              Bienvenido, {localStorage.getItem('name')}
+              Bienvenido, {getUserFullName()}
             </span>
             <button 
               onClick={handleLogout}
