@@ -6,7 +6,9 @@ function ClientSignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     idCard: '',
-    name: '',
+    identificationType: 'CC', // Valor por defecto
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -45,10 +47,12 @@ function ClientSignUp() {
       return;
     }
 
-    // Crear objeto para enviar al backend con role: "USER"
+    // Crear objeto para enviar al backend
     const registrationData = {
       idCard: parseInt(formData.idCard),
-      name: formData.name,
+      identificationType: formData.identificationType,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
       phoneNumber: formData.phoneNumber,
@@ -104,7 +108,29 @@ function ClientSignUp() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            {/* Identificación */}
+            {/* Tipo de Identificación */}
+            <div>
+              <label htmlFor="identificationType" className="block text-sm font-medium text-gray-200 mb-1">
+                Tipo de Identificación
+              </label>
+              <select
+                id="identificationType"
+                name="identificationType"
+                required
+                value={formData.identificationType}
+                onChange={handleChange}
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                <option value="TI">Tarjeta de Identidad (TI)</option>
+                <option value="CC">Cédula de Ciudadanía (CC)</option>
+                <option value="NUIP">NUIP</option>
+                <option value="CE">Cédula de Extranjería (CE)</option>
+                <option value="P">Pasaporte (P)</option>
+              </select>
+            </div>
+
+            {/* Número de Identificación */}
             <div>
               <label htmlFor="idCard" className="block text-sm font-medium text-gray-200 mb-1">
                 Número de Identificación
@@ -124,19 +150,37 @@ function ClientSignUp() {
             
             {/* Nombre */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-1">
-                Nombre Completo
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-200 mb-1">
+                Nombre(s)
               </label>
               <input
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 type="text"
                 required
-                value={formData.name}
+                value={formData.firstName}
                 onChange={handleChange}
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Ingrese su nombre completo"
+                placeholder="Ingrese su nombre"
+              />
+            </div>
+
+            {/* Apellido */}
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-200 mb-1">
+                Apellido(s)
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                required
+                value={formData.lastName}
+                onChange={handleChange}
+                disabled={isLoading}
+                className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Ingrese su apellido"
               />
             </div>
             
@@ -168,12 +212,12 @@ function ClientSignUp() {
                 name="password"
                 type="password"
                 required
-                minLength="3"
+                minLength="6"
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Mínimo 3 caracteres"
+                placeholder="Mínimo 6 caracteres"
               />
             </div>
             
@@ -187,7 +231,7 @@ function ClientSignUp() {
                 name="confirmPassword"
                 type="password"
                 required
-                minLength="3"
+                minLength="6"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 disabled={isLoading}

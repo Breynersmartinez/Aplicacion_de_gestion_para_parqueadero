@@ -8,10 +8,9 @@ import Footer from './components/Footer';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
 import AdminHomeDashboard from './pages/AdminHomeDashboard';
 
-import ClientDashboard from './pages/ClientDashboard';
+import UserDashboard from './pages/UserDashboard';
 import ClientSignUp from './pages/ClientSignUp';
 import ChatBot from './pages/ChatBot';
 
@@ -55,11 +54,10 @@ const App = () => {
         <Route path="/chatBot" element={<ChatBot />} />
      
 
-        {/* Ruta para el panel de administración */}
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+     
      
            {/* Ruta para el panel de administración de usuarios*/}
-        <Route path="/client-dashboard" element={<ClientDashboard />} />
+        <Route path="/user-dashboard" element={<UserDashboard />} />
     
       </Routes>
     </Router>
